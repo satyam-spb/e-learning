@@ -1,0 +1,13 @@
+# Python virtual environment
+.venv/
+venv/
+__pycache__/
+
+# Dependencies
+node_modules/
+
+# Environment variables file
+.env
+
+# Ignore virtual environment inside server folder
+server/venv/

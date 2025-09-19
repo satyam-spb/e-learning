@@ -1,0 +1,499 @@
+[
+  {
+    "id": "course1",
+    "title": "Machine Learning Basics",
+    "description": "Learn how ML works and how to build simple models from scratch.",
+    "tags": ["ML", "AI", "data science"],
+    "profession": ["Data Scientist", "Engineer"]
+  },
+  {
+    "id": "course2",
+    "title": "Frontend Development with React",
+    "description": "Master React to build interactive user interfaces and single-page apps.",
+    "tags": ["React", "JavaScript", "web development"],
+    "profession": ["Frontend Developer", "Full-Stack Developer"]
+  },
+  {
+    "id": "course3",
+    "title": "Advanced Python",
+    "description": "Explore advanced Python features, best practices, and performance tips.",
+    "tags": ["Python", "backend", "advanced"],
+    "profession": ["Developer", "Data Scientist"]
+  },
+  {
+    "id": "course4",
+    "title": "Deep Learning Foundations",
+    "description": "Dive into neural networks, TensorFlow, and PyTorch to build deep learning models.",
+    "tags": ["deep learning", "neural networks", "AI"],
+    "profession": ["Data Scientist", "ML Engineer"]
+  },
+  {
+    "id": "course5",
+    "title": "Java Basics",
+    "description": "Get started with Java syntax, OOP principles, and basic data structures.",
+    "tags": ["Java", "basics", "OOP"],
+    "profession": ["Software Engineer", "Backend Developer"]
+  },
+  {
+    "id": "course6",
+    "title": "Advanced Java",
+    "description": "Learn generics, concurrency, streams, and design patterns in Java.",
+    "tags": ["Java", "advanced", "concurrency"],
+    "profession": ["Software Engineer", "Architect"]
+  },
+  {
+    "id": "course7",
+    "title": "Data Structures & Algorithms in Java",
+    "description": "Implement and analyze key data structures and algorithms using Java.",
+    "tags": ["DSA", "Java", "algorithms"],
+    "profession": ["Software Engineer", "Developer"]
+  },
+  {
+    "id": "course8",
+    "title": "Data Structures & Algorithms in Python",
+    "description": "Practice essential DSA concepts using Python for interviews and projects.",
+    "tags": ["DSA", "Python", "algorithms"],
+    "profession": ["Software Engineer", "Developer"]
+  },
+  {
+    "id": "course9",
+    "title": "DSA with C/C++",
+    "description": "Master data structures and algorithms in C and C++ for performance-critical apps.",
+    "tags": ["DSA", "C", "C++"],
+    "profession": ["Software Engineer", "Embedded Developer"]
+  },
+  {
+    "id": "course10",
+    "title": "JavaScript Basics",
+    "description": "Understand JS syntax, DOM manipulation, and event handling in the browser.",
+    "tags": ["JavaScript", "basics", "web development"],
+    "profession": ["Frontend Developer", "Full-Stack Developer"]
+  },
+  {
+    "id": "course11",
+    "title": "JavaScript Advanced Patterns",
+    "description": "Learn closures, prototypes, async/await, and modern ES6+ features.",
+    "tags": ["JavaScript", "advanced", "ES6+"],
+    "profession": ["Frontend Developer", "Full-Stack Developer"]
+  },
+  {
+    "id": "course12",
+    "title": "Web Development Basics",
+    "description": "HTML, CSS & JS fundamentals to build static and responsive web pages.",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "profession": ["Web Developer", "Frontend Developer"]
+  },
+  {
+    "id": "course13",
+    "title": "Full-Stack JavaScript Backend",
+    "description": "Build RESTful APIs using Node.js, Express, and MongoDB.",
+    "tags": ["Node.js", "Express", "backend"],
+    "profession": ["Backend Developer", "Full-Stack Developer"]
+  },
+  {
+    "id": "course14",
+    "title": "Spring Boot Microservices",
+    "description": "Create scalable microservices with Spring Boot, JPA, and Docker.",
+    "tags": ["Spring Boot", "Java", "microservices"],
+    "profession": ["Backend Developer", "Software Architect"]
+  },
+  {
+    "id": "course15",
+    "title": "HTML, CSS & Advanced Layouts",
+    "description": "Master CSS Grid, Flexbox, and responsive design techniques.",
+    "tags": ["HTML", "CSS", "responsive design"],
+    "profession": ["Web Designer", "Frontend Developer"]
+  },
+  {
+    "id": "course16",
+    "title": "REST API Design",
+    "description": "Best practices for designing, documenting, and testing RESTful services.",
+    "tags": ["API", "REST", "documentation"],
+    "profession": ["Backend Developer", "API Engineer"]
+  },
+  {
+    "id": "course17",
+    "title": "DevOps Essentials",
+    "description": "CI/CD pipelines, Docker, Kubernetes, and infrastructure as code.",
+    "tags": ["DevOps", "Docker", "CI/CD"],
+    "profession": ["DevOps Engineer", "SRE"]
+  },
+  {
+    "id": "course18",
+    "title": "Data Science with R",
+    "description": "Statistical analysis, visualization, and machine learning using R.",
+    "tags": ["data science", "R", "statistics"],
+    "profession": ["Data Scientist", "Analyst"]
+  },
+  {
+    "id": "course19",
+    "title": "Natural Language Processing",
+    "description": "Text preprocessing, embeddings, and building NLP pipelines.",
+    "tags": ["NLP", "text", "transformers"],
+    "profession": ["ML Engineer", "Data Scientist"]
+  },
+  {
+    "id": "course20",
+    "title": "Cloud Computing Fundamentals",
+    "description": "Learn AWS/GCP basics, virtual networks, and cloud storage services.",
+    "tags": ["cloud", "AWS", "GCP"],
+    "profession": ["Cloud Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "course21",
+    "title": "Cloud Security",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of cloud security.",
+    "tags": ["cloud", "security"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course22",
+    "title": "Blockchain Basics",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of blockchain basics.",
+    "tags": ["blockchain", "basics"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course23",
+    "title": "Cybersecurity Fundamentals",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of cybersecurity fundamentals.",
+    "tags": ["cybersecurity", "fundamentals"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course24",
+    "title": "Ethical Hacking",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of ethical hacking.",
+    "tags": ["ethical", "hacking"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course25",
+    "title": "Python for Data Analysis",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of python for data analysis.",
+    "tags": ["python", "for", "data", "analysis"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course26",
+    "title": "Kubernetes Basics",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of kubernetes basics.",
+    "tags": ["kubernetes", "basics"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course27",
+    "title": "AI Ethics",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of AI ethics.",
+    "tags": ["AI", "ethics"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course28",
+    "title": "Computer Vision Basics",
+    "description": "Comprehensive course covering the fundamentals and advanced concepts of computer vision basics.",
+    "tags": ["computer", "vision", "basics"],
+    "profession": ["Software Engineer", "Data Scientist", "Developer"]
+  },
+  {
+    "id": "course29",
+    "title": "Mobile App Development",
+    "description": "Comprehensive course on building mobile applications for Android and iOS.",
+    "tags": ["mobile", "app", "development"],
+    "profession": ["Developer", "Software Engineer"]
+  },
+  {
+    "id": "course30",
+    "title": "React Native",
+    "description": "Learn to build cross-platform mobile apps using React Native.",
+    "tags": ["react", "native", "mobile", "development"],
+    "profession": ["Frontend Developer", "Mobile Developer"]
+  },
+  {
+    "id": "course31",
+    "title": "Docker Essentials",
+    "description": "Master the basics of containerization and Docker for software development.",
+    "tags": ["docker", "containers", "devops"],
+    "profession": ["Software Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "course32",
+    "title": "Git and Github",
+    "description": "Understand version control and collaboration using Git and Github.",
+    "tags": ["git", "github", "version control"],
+    "profession": ["Software Engineer", "Developer"]
+  },
+  {
+    "id": "course33",
+    "title": "RESTful APIs",
+    "description": "Design and build RESTful APIs for scalable applications.",
+    "tags": ["rest", "api", "backend"],
+    "profession": ["Backend Developer", "Software Engineer"]
+  },
+  {
+    "id": "course34",
+    "title": "GraphQL APIs",
+    "description": "Build flexible and scalable APIs using GraphQL.",
+    "tags": ["graphql", "api", "backend"],
+    "profession": ["Backend Developer", "Software Engineer"]
+  },
+  {
+    "id": "course35",
+    "title": "Microservices Architecture",
+    "description": "Introduction and best practices for building microservices-based systems.",
+    "tags": ["microservices", "architecture", "design"],
+    "profession": ["Software Architect", "Backend Developer"]
+  },
+  {
+    "id": "course36",
+    "title": "Agile Methodologies",
+    "description": "Learn agile frameworks and practices for team software development.",
+    "tags": ["agile", "scrum", "kanban"],
+    "profession": ["Project Manager", "Developer"]
+  },
+  {
+    "id": "course37",
+    "title": "Data Engineering Basics",
+    "description": "Foundational concepts in building and maintaining data pipelines.",
+    "tags": ["data", "engineering", "pipelines"],
+    "profession": ["Data Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course38",
+    "title": "Big Data Analytics",
+    "description": "Learn tools and techniques for big data storage, processing, and analysis.",
+    "tags": ["big data", "analytics"],
+    "profession": ["Data Scientist", "Analytics Engineer"]
+  },
+  {
+    "id": "course39",
+    "title": "Spark for Big Data",
+    "description": "Use Apache Spark for scalable big data analysis.",
+    "tags": ["spark", "big data", "analytics"],
+    "profession": ["Data Engineer", "Data Scientist"]
+  },
+  {
+    "id": "course40",
+    "title": "Scala for Data Engineering",
+    "description": "Apply Scala programming to data engineering workflows.",
+    "tags": ["scala", "data engineering"],
+    "profession": ["Data Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course41",
+    "title": "Data Visualization with Tableau",
+    "description": "Create impactful data visualizations using Tableau.",
+    "tags": ["data visualization", "tableau", "analytics"],
+    "profession": ["Data Analyst", "Business Analyst"]
+  },
+  {
+    "id": "course42",
+    "title": "Power BI Intro",
+    "description": "Introduction to interactive business analytics with Power BI.",
+    "tags": ["power bi", "analytics", "business intelligence"],
+    "profession": ["Data Analyst", "BI Developer"]
+  },
+  {
+    "id": "course43",
+    "title": "Machine Learning Algorithms Advanced",
+    "description": "Explore advanced machine learning algorithms and techniques.",
+    "tags": ["machine learning", "advanced", "algorithms"],
+    "profession": ["Data Scientist", "ML Engineer"]
+  },
+  {
+    "id": "course44",
+    "title": "Reinforcement Learning",
+    "description": "Fundamentals and applications of reinforcement learning in AI.",
+    "tags": ["reinforcement learning", "ai"],
+    "profession": ["ML Engineer", "Data Scientist"]
+  },
+  {
+    "id": "course45",
+    "title": "NLP Advanced",
+    "description": "Advanced concepts and projects in natural language processing.",
+    "tags": ["nlp", "advanced", "ai"],
+    "profession": ["Data Scientist", "ML Engineer"]
+  },
+  {
+    "id": "course46",
+    "title": "Time Series Analysis",
+    "description": "Techniques for analyzing and forecasting time series data.",
+    "tags": ["time series", "data analysis"],
+    "profession": ["Data Scientist", "Business Analyst"]
+  },
+  {
+    "id": "course47",
+    "title": "Database Management Systems",
+    "description": "Theory and practice of relational and non-relational databases.",
+    "tags": ["database", "management", "systems"],
+    "profession": ["Software Engineer", "Database Administrator"]
+  },
+  {
+    "id": "course48",
+    "title": "SQL Advanced",
+    "description": "In-depth querying and optimization in SQL databases.",
+    "tags": ["sql", "database", "advanced"],
+    "profession": ["Database Administrator", "Software Engineer"]
+  },
+  {
+    "id": "course49",
+    "title": "NoSQL Databases",
+    "description": "Introduction to NoSQL systems for unstructured data handling.",
+    "tags": ["nosql", "database", "unstructured"],
+    "profession": ["Database Administrator", "Software Engineer"]
+  },
+  {
+    "id": "course50",
+    "title": "Docker and Kubernetes",
+    "description": "Orchestrate containers using Docker and Kubernetes.",
+    "tags": ["docker", "kubernetes", "containers"],
+    "profession": ["DevOps Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course51",
+    "title": "Android Development",
+    "description": "Build Android apps from scratch using Java and Kotlin.",
+    "tags": ["android", "mobile development"],
+    "profession": ["Mobile Developer", "Software Engineer"]
+  },
+  {
+    "id": "course52",
+    "title": "iOS Development",
+    "description": "Develop iOS applications using Swift and Xcode.",
+    "tags": ["ios", "mobile development"],
+    "profession": ["Mobile Developer", "Software Engineer"]
+  },
+  {
+    "id": "course53",
+    "title": "Game Development with Unity",
+    "description": "Create 2D and 3D games using the Unity engine.",
+    "tags": ["game development", "unity"],
+    "profession": ["Game Developer", "Software Engineer"]
+  },
+  {
+    "id": "course54",
+    "title": "3D Modeling Basics",
+    "description": "Introduction to 3D modeling for games and simulations.",
+    "tags": ["3d modeling", "games", "simulation"],
+    "profession": ["Game Developer", "Animator"]
+  },
+  {
+    "id": "course55",
+    "title": "DevOps with Jenkins",
+    "description": "Automate CI/CD pipelines using Jenkins.",
+    "tags": ["devops", "jenkins", "cicd"],
+    "profession": ["DevOps Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course56",
+    "title": "CI/CD Pipelines",
+    "description": "Implement CI/CD best practices for faster software delivery.",
+    "tags": ["cicd", "pipelines", "devops"],
+    "profession": ["DevOps Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course57",
+    "title": "Software Architecture",
+    "description": "Learn software architecture principles and design patterns.",
+    "tags": ["architecture", "software design"],
+    "profession": ["Software Engineer", "Software Architect"]
+  },
+  {
+    "id": "course58",
+    "title": "Design Patterns",
+    "description": "Study popular design patterns and their real-world usage.",
+    "tags": ["design patterns", "software development"],
+    "profession": ["Software Engineer", "Developer"]
+  },
+  {
+    "id": "course59",
+    "title": "Performance Optimization",
+    "description": "Techniques to optimize software and application performance.",
+    "tags": ["optimization", "performance", "software"],
+    "profession": ["Software Engineer"]
+  },
+  {
+    "id": "course60",
+    "title": "Cloud Computing with AWS",
+    "description": "Deploy scalable applications on AWS cloud.",
+    "tags": ["cloud", "aws", "deployment"],
+    "profession": ["Cloud Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "course61",
+    "title": "Cloud Computing with Azure",
+    "description": "Implement cloud solutions using Microsoft Azure.",
+    "tags": ["cloud", "azure", "deployment"],
+    "profession": ["Cloud Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "course62",
+    "title": "Serverless Computing",
+    "description": "Build and deploy serverless applications.",
+    "tags": ["serverless", "cloud", "deployment"],
+    "profession": ["Cloud Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course63",
+    "title": "Internet of Things Basics",
+    "description": "Foundational concepts in IoT and smart device development.",
+    "tags": ["iot", "internet of things", "devices"],
+    "profession": ["IoT Engineer", "Software Engineer"]
+  },
+  {
+    "id": "course64",
+    "title": "Quantum Computing Intro",
+    "description": "Introduction to quantum computing and algorithms.",
+    "tags": ["quantum computing", "algorithms", "intro"],
+    "profession": ["Researcher", "Software Engineer"]
+  },
+  {
+    "id": "course65",
+    "title": "Data Privacy and Compliance",
+    "description": "Principles and regulations in data privacy and compliance.",
+    "tags": ["data privacy", "compliance"],
+    "profession": ["Data Scientist", "Compliance Officer"]
+  },
+  {
+    "id": "course66",
+    "title": "Augmented Reality Basics",
+    "description": "Learn fundamentals of augmented reality and its applications.",
+    "tags": ["ar", "augmented reality", "applications"],
+    "profession": ["AR Developer", "Software Engineer"]
+  },
+  {
+    "id": "course67",
+    "title": "Virtual Reality Applications",
+    "description": "Explore the development of applications for virtual reality.",
+    "tags": ["vr", "virtual reality", "applications"],
+    "profession": ["VR Developer", "Software Engineer"]
+  },
+  {
+    "id": "course68",
+    "title": "Python Automation",
+    "description": "Automate tasks using Python scripting.",
+    "tags": ["python", "automation", "scripting"],
+    "profession": ["Software Engineer", "Developer"]
+  },
+  {
+    "id": "course69",
+    "title": "Linux Server Administration",
+    "description": "Manage and secure Linux servers.",
+    "tags": ["linux", "server", "administration"],
+    "profession": ["SysAdmin", "DevOps Engineer"]
+  },
+  {
+    "id": "course70",
+    "title": "Network Fundamentals",
+    "description": "Networking basics: TCP/IP, routing, and switching.",
+    "tags": ["network", "fundamentals", "tcp/ip"],
+    "profession": ["Network Engineer", "SysAdmin"]
+  },
+  {
+    "id": "course71",
+    "title": "Ethical AI Practices",
+    "description": "Ensure responsible and ethical use of AI technologies.",
+    "tags": ["ethical ai", "ai", "responsibility"],
+    "profession": ["AI Engineer", "Ethics Officer"]
+  }
+]
