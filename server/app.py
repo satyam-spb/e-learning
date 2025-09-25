@@ -90,7 +90,8 @@ class RecommendationRequest(BaseModel):
 class ChatInput(BaseModel):
     message: str
     conversation_id: str
-    user_id: str
+    # Make user_id optional (frontend may send empty string for anonymous users)
+    user_id: Optional[str] = ""
 
 class UserQuizResult(BaseModel):
     user_id: str
@@ -120,22 +121,90 @@ def build_course_text(course: dict) -> str:
     profession = ", ".join(course.get("profession", []))
     return f"Title: {title}, Description: {desc}, Tags: {tags}, Profession: {profession}"
 
+# def cache_course_embeddings(courses: List[dict]):
+#     for course in courses:
+#         course_text = build_course_text(course)
+#         embedding = embedding_model.encode([course_text], show_progress_bar=False)[0]
+#         course_id = course["id"]
+#         course_embeddings_collection.update_one(
+#             {"courseId": course_id},
+#             {"$set": {"embedding": embedding.tolist()}},
+#             upsert=True
+#         )
+
+# # --- Startup: cache embeddings ---
+# @app.on_event("startup")
+# async def startup_event():
+#     if COURSES:
+#         cache_course_embeddings(COURSES)
+
+# --- Embedding caching helpers (synchronous, consistent field names) ---
+def ensure_course_embeddings_cached():
+    """
+    Populate courseEmbeddings only if it is empty.
+    Uses synchronous pymongo calls and stores embeddings under 'courseId'
+    so the rest of the code (which expects 'courseId') works correctly.
+    This function is synchronous (pymongo) — we'll call it from the async
+    startup handler using run_in_executor to avoid blocking the event loop.
+    """
+    try:
+        existing_count = course_embeddings_collection.count_documents({})
+    except Exception as exc:
+        print(f"[startup] Warning: could not count courseEmbeddings: {exc}")
+        existing_count = 0
+
+    if existing_count > 0:
+        print(f"[startup] Skipping embedding generation – {existing_count} already cached.")
+        return
+
+    print("[startup] No cached embeddings found. Computing now…")
+    courses_to_process = COURSES or []
+    for course in courses_to_process:
+        course_text = build_course_text(course)  # use full text (title + desc + tags + profession)
+        embedding = embedding_model.encode([course_text], show_progress_bar=False)[0]
+        course_id = course.get("id")
+        if not course_id:
+            # skip malformed entries
+            continue
+        course_embeddings_collection.update_one(
+            {"courseId": course_id},
+            {"$set": {
+                "embedding": embedding.tolist(),
+                "title": course.get("title", ""),
+                "tags": course.get("tags", [])
+            }},
+            upsert=True
+        )
+    print("[startup] Course embeddings cached successfully.")
+
+
 def cache_course_embeddings(courses: List[dict]):
+    """
+    Helper you can call manually to (re)compute embeddings for a provided list.
+    Keeps the same 'courseId' field name and uses the same build_course_text flow.
+    """
     for course in courses:
         course_text = build_course_text(course)
         embedding = embedding_model.encode([course_text], show_progress_bar=False)[0]
-        course_id = course["id"]
+        course_id = course.get("id")
+        if not course_id:
+            continue
         course_embeddings_collection.update_one(
             {"courseId": course_id},
-            {"$set": {"embedding": embedding.tolist()}},
+            {"$set": {"embedding": embedding.tolist(), "title": course.get("title", ""), "tags": course.get("tags", [])}},
             upsert=True
         )
 
-# --- Startup: cache embeddings ---
+
+# --- Startup: cache embeddings (run sync work in executor to avoid blocking) ---
 @app.on_event("startup")
 async def startup_event():
-    if COURSES:
-        cache_course_embeddings(COURSES)
+    import asyncio
+    loop = asyncio.get_running_loop()
+    # run the blocking embedding population in a thread to avoid blocking the event loop
+    await loop.run_in_executor(None, ensure_course_embeddings_cached)
+    # NOTE: do NOT call cache_course_embeddings(COURSES) here as that duplicates work.
+
 
 def infer_course_difficulty(course: dict) -> str:
     title = course.get("title", "").lower()
@@ -210,6 +279,38 @@ async def recommend(request: RecommendationRequest):
         
         course_embeddings = [np.array(c["embedding"]) for c in course_embeddings_collection.find({"courseId": {"$in": [c["id"] for c in filtered_courses]}})]
         similarities = cosine_similarity([user_embedding], course_embeddings)[0]
+
+        # # Build a mapping courseId -> embedding so order matches filtered_courses
+        # ids = [c["id"] for c in filtered_courses]
+        # if not ids:
+        #     raise HTTPException(status_code=200, detail="No courses available to recommend.")
+
+        # # fetch all embedding docs for these ids
+        # emb_docs = list(course_embeddings_collection.find({"courseId": {"$in": ids}}))
+        # emb_map = {doc["courseId"]: np.array(doc["embedding"]) for doc in emb_docs if "embedding" in doc}
+
+        # embeddings_list = []
+        # # ensure we have an embedding for every course; if missing, compute & persist it
+        # for c in filtered_courses:
+        #     cid = c["id"]
+        #     emb = emb_map.get(cid)
+        #     if emb is None:
+        #         # compute on-the-fly and persist (keeps DB complete)
+        #         course_text = build_course_text(c)
+        #         emb_vec = embedding_model.encode([course_text], show_progress_bar=False)[0]
+        #         course_embeddings_collection.update_one(
+        #             {"courseId": cid},
+        #             {"$set": {"embedding": emb_vec.tolist(), "title": c.get("title", ""), "tags": c.get("tags", [])}},
+        #             upsert=True
+        #         )
+        #         emb = np.array(emb_vec)
+        #     embeddings_list.append(emb)
+
+        # if len(embeddings_list) == 0:
+        #     raise HTTPException(status_code=500, detail="No course embeddings available to compute recommendations.")
+
+        # similarities = cosine_similarity([user_embedding], embeddings_list)[0]
+
         
         user_proficiency = "none"
         if user_quiz:
@@ -243,14 +344,30 @@ async def recommend(request: RecommendationRequest):
 @app.post("/chat/")
 async def chat(input: ChatInput):
     try:
-        classification_prompt = PromptTemplate(input_variables=["message"], template="Classify the following user message as 'coding' or 'other'. Message: {message} Classification:")
-        classification_chain = classification_prompt | llm | StrOutputParser()
-        classification_result = await classification_chain.ainvoke({"message": input.message})
-        
+        classification_prompt = PromptTemplate(
+            input_variables=["message"],
+            template="Classify the following user message as 'coding' or 'other'. Message: {message} Classification:"
+        )
+
+        # Run classification with a safe fallback in case the LLM or chain fails
+        try:
+            classification_chain = classification_prompt | llm | StrOutputParser()
+            classification_result = await classification_chain.ainvoke({"message": input.message})
+        except Exception as ex:
+            # Log and fallback to treating as 'coding' so the bot can still attempt to answer
+            print(f"[chat] classification failed, falling back: {ex}")
+            classification_result = "coding"
+
         if "other" in classification_result.strip().lower():
             return {"response": "I am a chatbot specializing in computer science and engineering. I can guide you on topics related to AI, software development, and cybersecurity. For other fields, I recommend seeking out a different resource.", "conversation_id": input.conversation_id}
 
-        user_quiz_results = user_results_collection.find_one({"user_id": input.user_id})
+        # Only query stored quiz results when a user_id is provided
+        user_quiz_results = None
+        if input.user_id:
+            try:
+                user_quiz_results = user_results_collection.find_one({"user_id": input.user_id})
+            except Exception as ex:
+                print(f"[chat] failed to fetch user quiz results: {ex}")
         retrieved_questions = list(quiz_collection.find({"question": {"$regex": input.message, "$options": "i"}}).limit(5))
         context = ""
         if user_quiz_results:
@@ -262,12 +379,28 @@ async def chat(input: ChatInput):
                 correct_answer = q['options'][correct_option_index] if 'options' in q and correct_option_index is not None else "N/A"
                 context += f"- Question: {q.get('question', 'N/A')}\n- Correct Answer: {correct_answer}\n"
 
-        prompt_template = PromptTemplate(input_variables=["context", "question"], template="You are a helpful and professional AI assistant. Use the following context to inform your response. Context: {context} User's Question: {question}")
-        chain = prompt_template | llm | StrOutputParser()
-        response = await chain.ainvoke({"context": context, "question": input.message})
-        return {"response": response, "conversation_id": input.conversation_id}
+        prompt_template = PromptTemplate(
+            input_variables=["context", "question"],
+            template="You are a helpful and professional AI assistant. Use the following context to inform your response. Context: {context} User's Question: {question}"
+        )
+
+        # Run the LLM generation with a fallback so the endpoint doesn't raise 500 if the model is unavailable
+        try:
+            chain = prompt_template | llm | StrOutputParser()
+            response = await chain.ainvoke({"context": context, "question": input.message})
+            return {"response": response, "conversation_id": input.conversation_id}
+        except Exception as ex:
+            print(f"[chat] LLM generation failed: {ex}")
+            # Provide a helpful fallback reply
+            fallback = (
+                "Sorry — the AI assistant is temporarily unavailable. "
+                "I can still offer a few tips: try asking about specific code snippets, error messages, or topics like 'React state' or 'Python loops'."
+            )
+            return {"response": fallback, "conversation_id": input.conversation_id}
 
     except Exception as e:
+        # Return a 500 with a friendly message for unexpected errors
+        print(f"[chat] unexpected error: {e}")
         raise HTTPException(status_code=500, detail=f"AI assistant is unavailable. Please try again later. (Error: {str(e)})")
 
 if __name__ == "__main__":

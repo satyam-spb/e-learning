@@ -8,6 +8,8 @@ node_modules/
 
 # Environment variables file
 .env
+client/.env
+client/.blot
 
 # Ignore virtual environment inside server folder
 server/venv/
