@@ -1,6 +1,6 @@
 import os
 import json
-from typing import List, Dict, Optional, Callable
+from typing import List, Dict, Optional, Callable, Any
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -226,7 +226,7 @@ async def get_quiz(
     if difficulty.lower() not in difficulty_mapping:
         raise HTTPException(status_code=400, detail="Invalid difficulty.")
     weight_value = difficulty_mapping[difficulty.lower()]
-    match_query = {"weight": weight_value}
+    match_query: Dict[str, Any] = {"weight": weight_value}
     if topic:
         match_query["topic"] = {"$regex": f"^{topic}$", "$options": "i"}
 
@@ -240,6 +240,12 @@ async def get_quiz(
         return questions
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+@app.get("/courses")
+async def get_courses():
+    """Return the list of available courses (used by the frontend to populate selects)."""
+    return COURSES
 
 @app.post("/quiz/results")
 async def save_quiz_results(result: UserQuizResult):

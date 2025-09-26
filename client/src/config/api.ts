@@ -82,4 +82,8 @@ export const apiHelpers = {
     const response = await api.get(`/quiz/results?user_id=${userId}`);
     return response.data;
   },
+  async getCourses() {
+    const response = await api.get("/courses");
+    return response.data || [];
+  },
 };

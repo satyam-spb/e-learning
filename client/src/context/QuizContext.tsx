@@ -78,13 +78,12 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
 
   // Load quiz state from localStorage on mount
   useEffect(() => {
-    const savedQuiz = localStorage.getItem("currentQuiz");
-    if (savedQuiz) {
-      try {
-        setQuizState(JSON.parse(savedQuiz));
-      } catch (error) {
-        console.error("Failed to load saved quiz:", error);
-      }
+    // Clear any in-progress quiz on startup so a restarted frontend starts fresh.
+    // This prevents resuming a partially completed quiz after restarting the dev server.
+    try {
+      localStorage.removeItem("currentQuiz");
+    } catch (err) {
+      console.warn("Could not clear saved quiz on startup:", err);
     }
   }, []);
 

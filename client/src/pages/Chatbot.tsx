@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, User, Bot } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { apiHelpers } from '../config/api';
-import { toast } from 'react-toastify';
-import StarBackground from '../components/UI/StarBackground';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, Sparkles, User, Bot } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { apiHelpers } from "../config/api";
+import { toast } from "react-toastify";
+import StarBackground from "../components/UI/StarBackground";
 
 interface Message {
   id: string;
@@ -16,41 +16,70 @@ interface Message {
 const Chatbot: React.FC = () => {
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [conversationId] = useState(() => {
-    const existing = localStorage.getItem('conversationId');
+    const existing = localStorage.getItem("conversationId");
     if (existing) return existing;
-    const newId = `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    localStorage.setItem('conversationId', newId);
+    const newId = `conv_${Date.now()}_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+    localStorage.setItem("conversationId", newId);
     return newId;
   });
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Load chat history from localStorage
+    // Clear any previous chat storage on mount (ensure a fresh chat when FE restarts)
+    try {
+      localStorage.removeItem(`chat_${conversationId}`);
+      localStorage.removeItem("conversationId");
+    } catch (err) {
+      console.warn("Failed to clear previous chat storage on mount", err);
+    }
+
     const savedMessages = localStorage.getItem(`chat_${conversationId}`);
     if (savedMessages) {
       try {
         const parsed = JSON.parse(savedMessages);
-        setMessages(parsed.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        })));
+        setMessages(
+          parsed.map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp),
+          }))
+        );
       } catch (error) {
-        console.error('Failed to load chat history:', error);
+        console.error("Failed to load chat history:", error);
       }
     } else {
       // Add welcome message
-      setMessages([{
-        id: 'welcome',
-        content: "🌟 Welcome to the cosmic realm of learning! I'm your AI assistant, ready to help you explore the universe of knowledge. Ask me anything about programming, science, or any topic you're curious about!",
-        isUser: false,
-        timestamp: new Date()
-      }]);
+      setMessages([
+        {
+          id: "welcome",
+          content:
+            "🌟 Welcome to the cosmic realm of learning! I'm your AI assistant, ready to help you explore the universe of knowledge. Ask me anything about programming, science, or any topic you're curious about!",
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ]);
     }
+  }, [conversationId]);
+
+  // Ensure chat storage is cleared when the page unloads (reload/close)
+  useEffect(() => {
+    const handleUnload = () => {
+      try {
+        localStorage.removeItem(`chat_${conversationId}`);
+        localStorage.removeItem("conversationId");
+      } catch (err) {
+        // ignore
+      }
+    };
+    window.addEventListener("beforeunload", handleUnload);
+    return () => window.removeEventListener("beforeunload", handleUnload);
   }, [conversationId]);
 
   useEffect(() => {
@@ -62,7 +91,7 @@ const Chatbot: React.FC = () => {
 
   useEffect(() => {
     // Auto-scroll to bottom
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
   const handleSendMessage = async () => {
@@ -72,11 +101,11 @@ const Chatbot: React.FC = () => {
       id: `msg_${Date.now()}_user`,
       content: inputMessage.trim(),
       isUser: true,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInputMessage('');
+    setMessages((prev) => [...prev, userMessage]);
+    setInputMessage("");
     setIsTyping(true);
 
     try {
@@ -88,48 +117,51 @@ const Chatbot: React.FC = () => {
 
       const aiMessage: Message = {
         id: `msg_${Date.now()}_ai`,
-        content: response.response || 'I apologize, but I encountered an issue. Please try again.',
+        content:
+          response.response ||
+          "I apologize, but I encountered an issue. Please try again.",
         isUser: false,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
-      console.error('Failed to send message:', error);
-      toast.error('Failed to send message. Please try again.');
-      
+      console.error("Failed to send message:", error);
+      toast.error("Failed to send message. Please try again.");
+
       const errorMessage: Message = {
         id: `msg_${Date.now()}_error`,
-        content: 'I apologize, but I\'m having trouble connecting to the cosmic network. Please check your connection and try again.',
+        content:
+          "I apologize, but I'm having trouble connecting to the cosmic network. Please check your connection and try again.",
         isUser: false,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsTyping(false);
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
     });
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
       <StarBackground />
-      
+
       <div className="container mx-auto px-4 py-6 h-screen flex flex-col">
         {/* Header */}
         <motion.div
@@ -160,38 +192,44 @@ const Chatbot: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className={`flex items-start space-x-3 mb-6 ${
-                  message.isUser ? 'flex-row-reverse space-x-reverse' : ''
+                  message.isUser ? "flex-row-reverse space-x-reverse" : ""
                 }`}
               >
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                  message.isUser 
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600' 
-                    : 'bg-gradient-to-r from-cyan-600 to-blue-600'
-                }`}>
+                <div
+                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                    message.isUser
+                      ? "bg-gradient-to-r from-purple-600 to-pink-600"
+                      : "bg-gradient-to-r from-cyan-600 to-blue-600"
+                  }`}
+                >
                   {message.isUser ? (
                     <User className="h-4 w-4" />
                   ) : (
                     <Sparkles className="h-4 w-4" />
                   )}
                 </div>
-                
-                <div className={`flex-1 max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl ${
-                  message.isUser ? 'text-right' : 'text-left'
-                }`}>
+
+                <div
+                  className={`flex-1 max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl ${
+                    message.isUser ? "text-right" : "text-left"
+                  }`}
+                >
                   <motion.div
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                     className={`inline-block p-4 rounded-lg ${
                       message.isUser
-                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                        : 'bg-slate-700/80 text-gray-100 border border-cyan-500/20'
+                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                        : "bg-slate-700/80 text-gray-100 border border-cyan-500/20"
                     }`}
                   >
                     <p className="whitespace-pre-wrap">{message.content}</p>
                   </motion.div>
-                  <p className={`text-xs text-gray-400 mt-1 ${
-                    message.isUser ? 'text-right' : 'text-left'
-                  }`}>
+                  <p
+                    className={`text-xs text-gray-400 mt-1 ${
+                      message.isUser ? "text-right" : "text-left"
+                    }`}
+                  >
                     {formatTime(message.timestamp)}
                   </p>
                 </div>
@@ -225,7 +263,9 @@ const Chatbot: React.FC = () => {
                       />
                     ))}
                   </div>
-                  <span className="text-gray-400 text-sm ml-2">AI is thinking...</span>
+                  <span className="text-gray-400 text-sm ml-2">
+                    AI is thinking...
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -261,7 +301,7 @@ const Chatbot: React.FC = () => {
               <Send className="h-5 w-5" />
             </motion.button>
           </div>
-          
+
           {!user && (
             <p className="text-gray-400 text-sm mt-2">
               💡 Tip: Sign in to save your conversation history across devices!

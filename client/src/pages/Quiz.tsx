@@ -1,29 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
-import { useQuiz } from '../context/QuizContext';
-import { useAuth } from '../context/AuthContext';
-import { apiHelpers } from '../config/api';
-import { toast } from 'react-toastify';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import StarBackground from '../components/UI/StarBackground';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Brain, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
+import { useQuiz } from "../context/QuizContext";
+import { useAuth } from "../context/AuthContext";
+import { apiHelpers } from "../config/api";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import StarBackground from "../components/UI/StarBackground";
 
 const Quiz: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { quizState, setQuizConfig, setQuestions, answerQuestion, nextQuestion, previousQuestion, completeQuiz } = useQuiz();
-  
+  const {
+    quizState,
+    setQuizConfig,
+    setQuestions,
+    answerQuestion,
+    nextQuestion,
+    previousQuestion,
+    completeQuiz,
+  } = useQuiz();
+
   const [showConfig, setShowConfig] = useState(true);
   const [loading, setLoading] = useState(false);
   const [configForm, setConfigForm] = useState({
-    profession: '',
-    topic: '',
-    difficulty: 'medium'
+    profession: "",
+    topic: "",
+    difficulty: "medium",
   });
+  const [professionOptions, setProfessionOptions] = useState<string[]>([]);
+  const [topicOptions, setTopicOptions] = useState<string[]>([]);
 
   const currentQuestion = quizState.questions[quizState.currentQuestionIndex];
-  const progress = quizState.questions.length > 0 ? ((quizState.currentQuestionIndex + 1) / quizState.questions.length) * 100 : 0;
+  const progress =
+    quizState.questions.length > 0
+      ? ((quizState.currentQuestionIndex + 1) / quizState.questions.length) *
+        100
+      : 0;
 
   useEffect(() => {
     // If we have an ongoing quiz, don't show config
@@ -32,22 +46,51 @@ const Quiz: React.FC = () => {
     }
   }, [quizState]);
 
+  useEffect(() => {
+    // load courses to populate profession/topic selects
+    const loadOptions = async () => {
+      try {
+        const courses = await apiHelpers.getCourses();
+        const profSet = new Set<string>();
+        const tagSet = new Set<string>();
+        courses.forEach((c: any) => {
+          if (Array.isArray(c.profession))
+            c.profession.forEach((p: string) => profSet.add(p));
+          if (Array.isArray(c.tags))
+            c.tags.forEach((t: string) => tagSet.add(t));
+        });
+        setProfessionOptions(Array.from(profSet).sort());
+        setTopicOptions(Array.from(tagSet).sort());
+      } catch (err) {
+        console.error("Failed to load course options:", err);
+      }
+    };
+    loadOptions();
+  }, []);
+
   const handleStartQuiz = async () => {
     if (!configForm.profession || !configForm.topic) {
-      toast.error('Please fill in all fields');
+      toast.error("Please fill in all fields");
       return;
     }
 
     setLoading(true);
     try {
-      const questions = await apiHelpers.getQuiz(configForm.difficulty, configForm.topic);
-      setQuizConfig(configForm.profession, configForm.topic, configForm.difficulty);
+      const questions = await apiHelpers.getQuiz(
+        configForm.difficulty,
+        configForm.topic
+      );
+      setQuizConfig(
+        configForm.profession,
+        configForm.topic,
+        configForm.difficulty
+      );
       setQuestions(questions);
       setShowConfig(false);
-      toast.success('Quiz loaded successfully!');
+      toast.success("Quiz loaded successfully!");
     } catch (error) {
-      toast.error('Failed to load quiz. Please try again.');
-      console.error('Failed to load quiz:', error);
+      toast.error("Failed to load quiz. Please try again.");
+      console.error("Failed to load quiz:", error);
     } finally {
       setLoading(false);
     }
@@ -68,7 +111,7 @@ const Quiz: React.FC = () => {
 
   const handleCompleteQuiz = async () => {
     completeQuiz();
-    
+
     // Save quiz result to backend
     try {
       await apiHelpers.submitQuizResult(
@@ -79,27 +122,29 @@ const Quiz: React.FC = () => {
         quizState.difficulty
       );
     } catch (error) {
-      console.error('Failed to save quiz result:', error);
+      console.error("Failed to save quiz result:", error);
       // Cache the result locally if user is not logged in
-      const cachedResults = JSON.parse(localStorage.getItem('cachedQuizResults') || '[]');
+      const cachedResults = JSON.parse(
+        localStorage.getItem("cachedQuizResults") || "[]"
+      );
       cachedResults.push({
         topic: quizState.topic,
         profession: quizState.profession,
         score: quizState.score,
         difficulty: quizState.difficulty,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       });
-      localStorage.setItem('cachedQuizResults', JSON.stringify(cachedResults));
+      localStorage.setItem("cachedQuizResults", JSON.stringify(cachedResults));
     }
-    
-    navigate('/quiz/result');
+
+    navigate("/quiz/result");
   };
 
   if (showConfig) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
         <StarBackground />
-        
+
         <div className="container mx-auto px-6 py-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -113,7 +158,8 @@ const Quiz: React.FC = () => {
                 Configure Your Quiz
               </h1>
               <p className="text-gray-300 text-lg">
-                Let's create a personalized quiz based on your profession and interests
+                Let's create a personalized quiz based on your profession and
+                interests
               </p>
             </div>
 
@@ -124,12 +170,23 @@ const Quiz: React.FC = () => {
                     What's your profession?
                   </label>
                   <input
-                    type="text"
+                    list="profession-list"
                     value={configForm.profession}
-                    onChange={(e) => setConfigForm(prev => ({ ...prev, profession: e.target.value }))}
-                    placeholder="e.g., Software Developer, Designer, Data Scientist"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setConfigForm((prev) => ({
+                        ...prev,
+                        profession: e.target.value,
+                      }))
+                    }
+                    placeholder="Type or select profession"
                     className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
+                    aria-label="Profession"
                   />
+                  <datalist id="profession-list">
+                    {professionOptions.map((p) => (
+                      <option key={p} value={p} />
+                    ))}
+                  </datalist>
                 </div>
 
                 <div>
@@ -137,12 +194,23 @@ const Quiz: React.FC = () => {
                     What topic would you like to be quizzed on?
                   </label>
                   <input
-                    type="text"
+                    list="topic-list"
                     value={configForm.topic}
-                    onChange={(e) => setConfigForm(prev => ({ ...prev, topic: e.target.value }))}
-                    placeholder="e.g., React, JavaScript, Machine Learning"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setConfigForm((prev) => ({
+                        ...prev,
+                        topic: e.target.value,
+                      }))
+                    }
+                    placeholder="Type or select topic"
                     className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
+                    aria-label="Topic"
                   />
+                  <datalist id="topic-list">
+                    {topicOptions.map((t) => (
+                      <option key={t} value={t} />
+                    ))}
+                  </datalist>
                 </div>
 
                 <div>
@@ -151,7 +219,12 @@ const Quiz: React.FC = () => {
                   </label>
                   <select
                     value={configForm.difficulty}
-                    onChange={(e) => setConfigForm(prev => ({ ...prev, difficulty: e.target.value }))}
+                    onChange={(e) =>
+                      setConfigForm((prev) => ({
+                        ...prev,
+                        difficulty: e.target.value,
+                      }))
+                    }
                     className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
                   >
                     <option value="easy">Easy</option>
@@ -165,7 +238,9 @@ const Quiz: React.FC = () => {
                   disabled={loading}
                   className="w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold transform hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 >
-                  {loading ? <LoadingSpinner /> : (
+                  {loading ? (
+                    <LoadingSpinner />
+                  ) : (
                     <>
                       <Brain className="h-5 w-5" />
                       <span>Start Quiz</span>
@@ -191,12 +266,15 @@ const Quiz: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
       <StarBackground />
-      
+
       <div className="container mx-auto px-6 py-8">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
-            <span>Question {quizState.currentQuestionIndex + 1} of {quizState.questions.length}</span>
+            <span>
+              Question {quizState.currentQuestionIndex + 1} of{" "}
+              {quizState.questions.length}
+            </span>
             <span>{Math.round(progress)}% Complete</span>
           </div>
           <div className="w-full bg-slate-700 rounded-full h-2">
@@ -227,24 +305,31 @@ const Quiz: React.FC = () => {
 
               <div className="space-y-3">
                 {currentQuestion.options.map((option, index) => {
-                  const isSelected = quizState.answers[currentQuestion.id] === option;
+                  const isSelected =
+                    quizState.answers[currentQuestion.id] === option;
                   return (
                     <motion.button
                       key={index}
                       onClick={() => handleAnswerSelect(option)}
                       className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                         isSelected
-                          ? 'border-purple-400 bg-purple-600/20'
-                          : 'border-slate-600 bg-slate-700/30 hover:border-slate-500 hover:bg-slate-600/30'
+                          ? "border-purple-400 bg-purple-600/20"
+                          : "border-slate-600 bg-slate-700/30 hover:border-slate-500 hover:bg-slate-600/30"
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                          isSelected ? 'border-purple-400 bg-purple-400' : 'border-gray-500'
-                        }`}>
-                          {isSelected && <CheckCircle className="h-4 w-4 text-white" />}
+                        <div
+                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                            isSelected
+                              ? "border-purple-400 bg-purple-400"
+                              : "border-gray-500"
+                          }`}
+                        >
+                          {isSelected && (
+                            <CheckCircle className="h-4 w-4 text-white" />
+                          )}
                         </div>
                         <span className="text-white">{option}</span>
                       </div>
@@ -268,7 +353,8 @@ const Quiz: React.FC = () => {
 
             <div className="flex items-center space-x-4">
               <span className="text-gray-400">
-                {Object.keys(quizState.answers).length} / {quizState.questions.length} answered
+                {Object.keys(quizState.answers).length} /{" "}
+                {quizState.questions.length} answered
               </span>
             </div>
 
@@ -278,9 +364,13 @@ const Quiz: React.FC = () => {
               className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span>
-                {quizState.currentQuestionIndex === quizState.questions.length - 1 ? 'Complete' : 'Next'}
+                {quizState.currentQuestionIndex ===
+                quizState.questions.length - 1
+                  ? "Complete"
+                  : "Next"}
               </span>
-              {quizState.currentQuestionIndex !== quizState.questions.length - 1 && (
+              {quizState.currentQuestionIndex !==
+                quizState.questions.length - 1 && (
                 <ChevronRight className="h-5 w-5" />
               )}
             </button>
