@@ -1,499 +1,1802 @@
 [
   {
-    "id": "course1",
-    "title": "Machine Learning Basics",
-    "description": "Learn how ML works and how to build simple models from scratch.",
-    "tags": ["ML", "AI", "data science"],
-    "profession": ["Data Scientist", "Engineer"]
-  },
-  {
-    "id": "course2",
-    "title": "Frontend Development with React",
-    "description": "Master React to build interactive user interfaces and single-page apps.",
-    "tags": ["React", "JavaScript", "web development"],
-    "profession": ["Frontend Developer", "Full-Stack Developer"]
-  },
-  {
-    "id": "course3",
-    "title": "Advanced Python",
-    "description": "Explore advanced Python features, best practices, and performance tips.",
-    "tags": ["Python", "backend", "advanced"],
-    "profession": ["Developer", "Data Scientist"]
-  },
-  {
-    "id": "course4",
-    "title": "Deep Learning Foundations",
-    "description": "Dive into neural networks, TensorFlow, and PyTorch to build deep learning models.",
-    "tags": ["deep learning", "neural networks", "AI"],
-    "profession": ["Data Scientist", "ML Engineer"]
-  },
-  {
-    "id": "course5",
-    "title": "Java Basics",
-    "description": "Get started with Java syntax, OOP principles, and basic data structures.",
-    "tags": ["Java", "basics", "OOP"],
-    "profession": ["Software Engineer", "Backend Developer"]
-  },
-  {
-    "id": "course6",
-    "title": "Advanced Java",
-    "description": "Learn generics, concurrency, streams, and design patterns in Java.",
-    "tags": ["Java", "advanced", "concurrency"],
-    "profession": ["Software Engineer", "Architect"]
-  },
-  {
-    "id": "course7",
-    "title": "Data Structures & Algorithms in Java",
-    "description": "Implement and analyze key data structures and algorithms using Java.",
-    "tags": ["DSA", "Java", "algorithms"],
-    "profession": ["Software Engineer", "Developer"]
-  },
-  {
-    "id": "course8",
-    "title": "Data Structures & Algorithms in Python",
-    "description": "Practice essential DSA concepts using Python for interviews and projects.",
-    "tags": ["DSA", "Python", "algorithms"],
-    "profession": ["Software Engineer", "Developer"]
-  },
-  {
-    "id": "course9",
-    "title": "DSA with C/C++",
-    "description": "Master data structures and algorithms in C and C++ for performance-critical apps.",
-    "tags": ["DSA", "C", "C++"],
-    "profession": ["Software Engineer", "Embedded Developer"]
-  },
-  {
-    "id": "course10",
-    "title": "JavaScript Basics",
-    "description": "Understand JS syntax, DOM manipulation, and event handling in the browser.",
-    "tags": ["JavaScript", "basics", "web development"],
-    "profession": ["Frontend Developer", "Full-Stack Developer"]
-  },
-  {
-    "id": "course11",
-    "title": "JavaScript Advanced Patterns",
-    "description": "Learn closures, prototypes, async/await, and modern ES6+ features.",
-    "tags": ["JavaScript", "advanced", "ES6+"],
-    "profession": ["Frontend Developer", "Full-Stack Developer"]
-  },
-  {
-    "id": "course12",
-    "title": "Web Development Basics",
-    "description": "HTML, CSS & JS fundamentals to build static and responsive web pages.",
-    "tags": ["HTML", "CSS", "JavaScript"],
-    "profession": ["Web Developer", "Frontend Developer"]
-  },
-  {
-    "id": "course13",
-    "title": "Full-Stack JavaScript Backend",
-    "description": "Build RESTful APIs using Node.js, Express, and MongoDB.",
-    "tags": ["Node.js", "Express", "backend"],
-    "profession": ["Backend Developer", "Full-Stack Developer"]
-  },
-  {
-    "id": "course14",
-    "title": "Spring Boot Microservices",
-    "description": "Create scalable microservices with Spring Boot, JPA, and Docker.",
-    "tags": ["Spring Boot", "Java", "microservices"],
-    "profession": ["Backend Developer", "Software Architect"]
-  },
-  {
-    "id": "course15",
-    "title": "HTML, CSS & Advanced Layouts",
-    "description": "Master CSS Grid, Flexbox, and responsive design techniques.",
-    "tags": ["HTML", "CSS", "responsive design"],
-    "profession": ["Web Designer", "Frontend Developer"]
-  },
-  {
-    "id": "course16",
-    "title": "REST API Design",
-    "description": "Best practices for designing, documenting, and testing RESTful services.",
-    "tags": ["API", "REST", "documentation"],
-    "profession": ["Backend Developer", "API Engineer"]
-  },
-  {
-    "id": "course17",
-    "title": "DevOps Essentials",
-    "description": "CI/CD pipelines, Docker, Kubernetes, and infrastructure as code.",
-    "tags": ["DevOps", "Docker", "CI/CD"],
-    "profession": ["DevOps Engineer", "SRE"]
-  },
-  {
-    "id": "course18",
-    "title": "Data Science with R",
-    "description": "Statistical analysis, visualization, and machine learning using R.",
-    "tags": ["data science", "R", "statistics"],
-    "profession": ["Data Scientist", "Analyst"]
-  },
-  {
-    "id": "course19",
-    "title": "Natural Language Processing",
-    "description": "Text preprocessing, embeddings, and building NLP pipelines.",
-    "tags": ["NLP", "text", "transformers"],
-    "profession": ["ML Engineer", "Data Scientist"]
-  },
-  {
-    "id": "course20",
-    "title": "Cloud Computing Fundamentals",
-    "description": "Learn AWS/GCP basics, virtual networks, and cloud storage services.",
-    "tags": ["cloud", "AWS", "GCP"],
-    "profession": ["Cloud Engineer", "DevOps Engineer"]
-  },
-  {
-    "id": "course21",
-    "title": "Cloud Security",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of cloud security.",
-    "tags": ["cloud", "security"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course22",
-    "title": "Blockchain Basics",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of blockchain basics.",
-    "tags": ["blockchain", "basics"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course23",
-    "title": "Cybersecurity Fundamentals",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of cybersecurity fundamentals.",
-    "tags": ["cybersecurity", "fundamentals"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course24",
-    "title": "Ethical Hacking",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of ethical hacking.",
-    "tags": ["ethical", "hacking"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course25",
-    "title": "Python for Data Analysis",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of python for data analysis.",
-    "tags": ["python", "for", "data", "analysis"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course26",
-    "title": "Kubernetes Basics",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of kubernetes basics.",
-    "tags": ["kubernetes", "basics"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course27",
-    "title": "AI Ethics",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of AI ethics.",
-    "tags": ["AI", "ethics"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course28",
-    "title": "Computer Vision Basics",
-    "description": "Comprehensive course covering the fundamentals and advanced concepts of computer vision basics.",
-    "tags": ["computer", "vision", "basics"],
-    "profession": ["Software Engineer", "Data Scientist", "Developer"]
-  },
-  {
-    "id": "course29",
-    "title": "Mobile App Development",
-    "description": "Comprehensive course on building mobile applications for Android and iOS.",
-    "tags": ["mobile", "app", "development"],
-    "profession": ["Developer", "Software Engineer"]
-  },
-  {
-    "id": "course30",
-    "title": "React Native",
-    "description": "Learn to build cross-platform mobile apps using React Native.",
-    "tags": ["react", "native", "mobile", "development"],
-    "profession": ["Frontend Developer", "Mobile Developer"]
-  },
-  {
-    "id": "course31",
-    "title": "Docker Essentials",
-    "description": "Master the basics of containerization and Docker for software development.",
-    "tags": ["docker", "containers", "devops"],
-    "profession": ["Software Engineer", "DevOps Engineer"]
-  },
-  {
-    "id": "course32",
-    "title": "Git and Github",
-    "description": "Understand version control and collaboration using Git and Github.",
-    "tags": ["git", "github", "version control"],
-    "profession": ["Software Engineer", "Developer"]
-  },
-  {
-    "id": "course33",
-    "title": "RESTful APIs",
-    "description": "Design and build RESTful APIs for scalable applications.",
-    "tags": ["rest", "api", "backend"],
-    "profession": ["Backend Developer", "Software Engineer"]
-  },
-  {
-    "id": "course34",
-    "title": "GraphQL APIs",
-    "description": "Build flexible and scalable APIs using GraphQL.",
-    "tags": ["graphql", "api", "backend"],
-    "profession": ["Backend Developer", "Software Engineer"]
-  },
-  {
-    "id": "course35",
-    "title": "Microservices Architecture",
-    "description": "Introduction and best practices for building microservices-based systems.",
-    "tags": ["microservices", "architecture", "design"],
-    "profession": ["Software Architect", "Backend Developer"]
-  },
-  {
-    "id": "course36",
-    "title": "Agile Methodologies",
-    "description": "Learn agile frameworks and practices for team software development.",
-    "tags": ["agile", "scrum", "kanban"],
-    "profession": ["Project Manager", "Developer"]
-  },
-  {
-    "id": "course37",
-    "title": "Data Engineering Basics",
-    "description": "Foundational concepts in building and maintaining data pipelines.",
-    "tags": ["data", "engineering", "pipelines"],
-    "profession": ["Data Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course38",
-    "title": "Big Data Analytics",
-    "description": "Learn tools and techniques for big data storage, processing, and analysis.",
-    "tags": ["big data", "analytics"],
-    "profession": ["Data Scientist", "Analytics Engineer"]
-  },
-  {
-    "id": "course39",
-    "title": "Spark for Big Data",
-    "description": "Use Apache Spark for scalable big data analysis.",
-    "tags": ["spark", "big data", "analytics"],
-    "profession": ["Data Engineer", "Data Scientist"]
-  },
-  {
-    "id": "course40",
-    "title": "Scala for Data Engineering",
-    "description": "Apply Scala programming to data engineering workflows.",
-    "tags": ["scala", "data engineering"],
-    "profession": ["Data Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course41",
-    "title": "Data Visualization with Tableau",
-    "description": "Create impactful data visualizations using Tableau.",
-    "tags": ["data visualization", "tableau", "analytics"],
-    "profession": ["Data Analyst", "Business Analyst"]
-  },
-  {
-    "id": "course42",
-    "title": "Power BI Intro",
-    "description": "Introduction to interactive business analytics with Power BI.",
-    "tags": ["power bi", "analytics", "business intelligence"],
-    "profession": ["Data Analyst", "BI Developer"]
-  },
-  {
-    "id": "course43",
-    "title": "Machine Learning Algorithms Advanced",
-    "description": "Explore advanced machine learning algorithms and techniques.",
-    "tags": ["machine learning", "advanced", "algorithms"],
-    "profession": ["Data Scientist", "ML Engineer"]
-  },
-  {
-    "id": "course44",
-    "title": "Reinforcement Learning",
-    "description": "Fundamentals and applications of reinforcement learning in AI.",
-    "tags": ["reinforcement learning", "ai"],
-    "profession": ["ML Engineer", "Data Scientist"]
-  },
-  {
-    "id": "course45",
-    "title": "NLP Advanced",
-    "description": "Advanced concepts and projects in natural language processing.",
-    "tags": ["nlp", "advanced", "ai"],
-    "profession": ["Data Scientist", "ML Engineer"]
-  },
-  {
-    "id": "course46",
-    "title": "Time Series Analysis",
-    "description": "Techniques for analyzing and forecasting time series data.",
-    "tags": ["time series", "data analysis"],
-    "profession": ["Data Scientist", "Business Analyst"]
-  },
-  {
-    "id": "course47",
-    "title": "Database Management Systems",
-    "description": "Theory and practice of relational and non-relational databases.",
-    "tags": ["database", "management", "systems"],
-    "profession": ["Software Engineer", "Database Administrator"]
-  },
-  {
-    "id": "course48",
-    "title": "SQL Advanced",
-    "description": "In-depth querying and optimization in SQL databases.",
-    "tags": ["sql", "database", "advanced"],
-    "profession": ["Database Administrator", "Software Engineer"]
-  },
-  {
-    "id": "course49",
-    "title": "NoSQL Databases",
-    "description": "Introduction to NoSQL systems for unstructured data handling.",
-    "tags": ["nosql", "database", "unstructured"],
-    "profession": ["Database Administrator", "Software Engineer"]
-  },
-  {
-    "id": "course50",
-    "title": "Docker and Kubernetes",
-    "description": "Orchestrate containers using Docker and Kubernetes.",
-    "tags": ["docker", "kubernetes", "containers"],
-    "profession": ["DevOps Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course51",
-    "title": "Android Development",
-    "description": "Build Android apps from scratch using Java and Kotlin.",
-    "tags": ["android", "mobile development"],
-    "profession": ["Mobile Developer", "Software Engineer"]
-  },
-  {
-    "id": "course52",
-    "title": "iOS Development",
-    "description": "Develop iOS applications using Swift and Xcode.",
-    "tags": ["ios", "mobile development"],
-    "profession": ["Mobile Developer", "Software Engineer"]
-  },
-  {
-    "id": "course53",
-    "title": "Game Development with Unity",
-    "description": "Create 2D and 3D games using the Unity engine.",
-    "tags": ["game development", "unity"],
-    "profession": ["Game Developer", "Software Engineer"]
-  },
-  {
-    "id": "course54",
-    "title": "3D Modeling Basics",
-    "description": "Introduction to 3D modeling for games and simulations.",
-    "tags": ["3d modeling", "games", "simulation"],
-    "profession": ["Game Developer", "Animator"]
-  },
-  {
-    "id": "course55",
-    "title": "DevOps with Jenkins",
-    "description": "Automate CI/CD pipelines using Jenkins.",
-    "tags": ["devops", "jenkins", "cicd"],
-    "profession": ["DevOps Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course56",
-    "title": "CI/CD Pipelines",
-    "description": "Implement CI/CD best practices for faster software delivery.",
-    "tags": ["cicd", "pipelines", "devops"],
-    "profession": ["DevOps Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course57",
-    "title": "Software Architecture",
-    "description": "Learn software architecture principles and design patterns.",
-    "tags": ["architecture", "software design"],
-    "profession": ["Software Engineer", "Software Architect"]
-  },
-  {
-    "id": "course58",
-    "title": "Design Patterns",
-    "description": "Study popular design patterns and their real-world usage.",
-    "tags": ["design patterns", "software development"],
-    "profession": ["Software Engineer", "Developer"]
-  },
-  {
-    "id": "course59",
-    "title": "Performance Optimization",
-    "description": "Techniques to optimize software and application performance.",
-    "tags": ["optimization", "performance", "software"],
-    "profession": ["Software Engineer"]
-  },
-  {
-    "id": "course60",
-    "title": "Cloud Computing with AWS",
-    "description": "Deploy scalable applications on AWS cloud.",
-    "tags": ["cloud", "aws", "deployment"],
-    "profession": ["Cloud Engineer", "DevOps Engineer"]
-  },
-  {
-    "id": "course61",
-    "title": "Cloud Computing with Azure",
-    "description": "Implement cloud solutions using Microsoft Azure.",
-    "tags": ["cloud", "azure", "deployment"],
-    "profession": ["Cloud Engineer", "DevOps Engineer"]
-  },
-  {
-    "id": "course62",
-    "title": "Serverless Computing",
-    "description": "Build and deploy serverless applications.",
-    "tags": ["serverless", "cloud", "deployment"],
-    "profession": ["Cloud Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course63",
-    "title": "Internet of Things Basics",
-    "description": "Foundational concepts in IoT and smart device development.",
-    "tags": ["iot", "internet of things", "devices"],
-    "profession": ["IoT Engineer", "Software Engineer"]
-  },
-  {
-    "id": "course64",
-    "title": "Quantum Computing Intro",
-    "description": "Introduction to quantum computing and algorithms.",
-    "tags": ["quantum computing", "algorithms", "intro"],
-    "profession": ["Researcher", "Software Engineer"]
-  },
-  {
-    "id": "course65",
-    "title": "Data Privacy and Compliance",
-    "description": "Principles and regulations in data privacy and compliance.",
-    "tags": ["data privacy", "compliance"],
-    "profession": ["Data Scientist", "Compliance Officer"]
-  },
-  {
-    "id": "course66",
-    "title": "Augmented Reality Basics",
-    "description": "Learn fundamentals of augmented reality and its applications.",
-    "tags": ["ar", "augmented reality", "applications"],
-    "profession": ["AR Developer", "Software Engineer"]
-  },
-  {
-    "id": "course67",
-    "title": "Virtual Reality Applications",
-    "description": "Explore the development of applications for virtual reality.",
-    "tags": ["vr", "virtual reality", "applications"],
-    "profession": ["VR Developer", "Software Engineer"]
-  },
-  {
-    "id": "course68",
-    "title": "Python Automation",
-    "description": "Automate tasks using Python scripting.",
-    "tags": ["python", "automation", "scripting"],
-    "profession": ["Software Engineer", "Developer"]
-  },
-  {
-    "id": "course69",
-    "title": "Linux Server Administration",
-    "description": "Manage and secure Linux servers.",
-    "tags": ["linux", "server", "administration"],
-    "profession": ["SysAdmin", "DevOps Engineer"]
-  },
-  {
-    "id": "course70",
-    "title": "Network Fundamentals",
-    "description": "Networking basics: TCP/IP, routing, and switching.",
-    "tags": ["network", "fundamentals", "tcp/ip"],
-    "profession": ["Network Engineer", "SysAdmin"]
-  },
-  {
-    "id": "course71",
-    "title": "Ethical AI Practices",
-    "description": "Ensure responsible and ethical use of AI technologies.",
-    "tags": ["ethical ai", "ai", "responsibility"],
-    "profession": ["AI Engineer", "Ethics Officer"]
+    "id": "res_ds_algo_doc_1",
+    "title": "DSA: GeeksforGeeks Core Data Structures Reference",
+    "description": "Comprehensive written articles and code implementations for all essential data structures, ideal for quick lookups and deep study.",
+    "tags": ["Data Structures and Algorithms", "Documentation", "Reference"],
+    "profession": ["Software Engineer", "Developer"],
+    "type": "doc",
+    "link": "https://www.geeksforgeeks.org/data-structures/"
+  },
+  {
+    "id": "res_ds_algo_doc_2",
+    "title": "DSA: Awesome LeetCode Resources",
+    "description": "Resources focused on recursion and dynamic programming for coding interviews.",
+    "tags": ["Data Structures and Algorithms", "Documentation", "Interview Prep"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://github.com/ashishps1/awesome-leetcode-resources"
+  },
+  {
+    "id": "res_ds_algo_vid_1",
+    "title": "DSA: Data Structures & Algorithms Full Course",
+    "description": "Complete course covering Stacks, Trees, Graphs, and Hash Tables with practical code examples.",
+    "tags": ["Data Structures and Algorithms", "Interview Prep", "Video"],
+    "profession": ["Software Engineer", "Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=8hly31xKli0"
+  },
+  {
+    "id": "res_ds_algo_vid_2",
+    "title": "DSA: Big O Notation Explained",
+    "description": "A focused tutorial on analyzing algorithm efficiency, understanding Big O, and differentiating complexities.",
+    "tags": ["Data Structures and Algorithms", "Fundamentals", "Video"],
+    "profession": ["Software Engineer", "Competitive Programmer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=Mo4vesaut8g"
+  },
+  {
+    "id": "res_ds_algo_proj_1",
+    "title": "DSA: The Algorithms Python Repository (Project)",
+    "description": "A massive open-source project containing implementations of various algorithms and data structures in Python, perfect for studying code.",
+    "tags": ["Data Structures and Algorithms", "Project", "Python", "Code Review"],
+    "profession": ["Software Engineer", "Developer"],
+    "type": "project",
+    "link": "https://github.com/TheAlgorithms/Python"
+  },
+  {
+    "id": "res_oop_doc_1",
+    "title": "OOP: Refactoring Guru Design Patterns Documentation",
+    "description": "High-quality, detailed explanations of all major design patterns with comprehensive code examples.",
+    "tags": ["Object-Oriented Programming (OOP)", "Design Patterns", "Documentation", "Reference"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://refactoring.guru/design-patterns"
+  },
+  {
+    "id": "res_oop_doc_2",
+    "title": "OOP: Oracle Java Official Tutorial on Classes and Objects",
+    "description": "Official documentation covering fundamental Java OOP concepts, including classes, methods, and interface implementation.",
+    "tags": ["Object-Oriented Programming (OOP)", "Java", "Documentation", "Fundamentals"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://docs.oracle.com/javase/tutorial/java/concepts/index.html"
+  },
+  {
+    "id": "res_oop_vid_1",
+    "title": "OOP: Four Pillars Explained",
+    "description": "Conceptual deep dive into Encapsulation, Inheritance, Polymorphism, and Abstraction.",
+    "tags": ["Object-Oriented Programming (OOP)", "Design Patterns", "Video", "Fundamentals"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=1ONhXmQuCKM"
+  },
+  {
+    "id": "res_oop_vid_2",
+    "title": "OOP: SOLID Principles Crash Course",
+    "description": "Quick overview of the SOLID principles to ensure scalable and maintainable object-oriented design.",
+    "tags": ["Object-Oriented Programming (OOP)", "Design Patterns", "SOLID", "Video"],
+    "profession": ["Software Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=2YiH3Uc6uD4"
+  },
+  {
+    "id": "res_oop_proj_1",
+    "title": "OOP: Bank Account Management System (Project)",
+    "description": "A project requiring the practical application of OOP principles like inheritance and polymorphism to manage bank accounts and transactions.",
+    "tags": ["Object-Oriented Programming (OOP)", "Java", "Project", "Inheritance"],
+    "profession": ["Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/oop-java-project"
+  },
+  {
+    "id": "res_fp_doc_1",
+    "title": "FP: Haskell Official Documentation and Guides",
+    "description": "The primary source for functional programming principles, covering Typeclasses and basic definitions.",
+    "tags": ["Functional Programming", "Haskell", "Documentation", "Reference"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://www.haskell.org/documentation/"
+  },
+  {
+    "id": "res_fp_doc_2",
+    "title": "FP: Ramda Functional Library Documentation",
+    "description": "A practical reference for using the Ramda library to apply functional programming techniques in JavaScript.",
+    "tags": ["Functional Programming", "JavaScript", "Documentation", "Ramda"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://ramdajs.com/docs/"
+  },
+  {
+    "id": "res_fp_vid_1",
+    "title": "FP: Functional Programming in JavaScript",
+    "description": "A conceptual and practical introduction to immutability, pure functions, and currying in JavaScript.",
+    "tags": ["Functional Programming", "JavaScript", "Video", "Fundamentals"],
+    "profession": ["Developer", "Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=e-5obm1G_FY"
+  },
+  {
+    "id": "res_fp_vid_2",
+    "title": "FP: Monads Explained",
+    "description": "Deep dive into Monads, Functors, and Applicatives, and how they handle side effects in a functional context.",
+    "tags": ["Functional Programming", "Monads", "Advanced", "Video"],
+    "profession": ["Architect", "Senior Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=t1e8gqXLbsU"
+  },
+  {
+    "id": "res_fp_proj_1",
+    "title": "FP: Simple Functional Todo App (Project)",
+    "description": "A small project demonstrating immutable state management and function composition using functional principles.",
+    "tags": ["Functional Programming", "JavaScript", "Project", "Immutability"],
+    "profession": ["Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/functional-programming-javascript"
+  },
+  {
+    "id": "res_rdp_doc_1",
+    "title": "RDP: HackerRank DP and Recursion Tutorials",
+    "description": "Tutorials and practice problems focused on common patterns like Rod Cutting, Knapsack, and Coin Change problems.",
+    "tags": ["Recursion and Dynamic Programming", "Documentation", "Practice"],
+    "profession": ["Competitive Programmer"],
+    "type": "doc",
+    "link": "https://www.hackerrank.com/domains/tutorials/dynamic-programming"
+  },
+  {
+    "id": "res_rdp_doc_2",
+    "title": "RDP: GeeksforGeeks DP and Memoization Reference",
+    "description": "In-depth articles explaining the difference between top-down (memoization) and bottom-up (tabulation) DP approaches.",
+    "tags": ["Recursion and Dynamic Programming", "Documentation", "Memoization"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://www.geeksforgeeks.org/dynamic-programming/"
+  },
+  {
+    "id": "res_rdp_vid_1",
+    "title": "RDP: Dynamic Programming Masterclass",
+    "description": "Detailed video series covering the core concepts of memoization, tabulation, and the optimal substructure property.",
+    "tags": ["Recursion and Dynamic Programming", "Algorithms", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=nqJ4I1G3Y6w"
+  },
+  {
+    "id": "res_rdp_vid_2",
+    "title": "RDP: Visualizing Recursion and Backtracking",
+    "description": "A visual explanation of how recursion works on the call stack and how backtracking algorithms solve complex search problems.",
+    "tags": ["Recursion and Dynamic Programming", "Backtracking", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=zvYV1s9AMoQ"
+  },
+  {
+    "id": "res_rdp_proj_1",
+    "title": "RDP: 0/1 Knapsack Problem Implementation (Project)",
+    "description": "A focused project implementing both the recursive and dynamic programming solutions for the classic Knapsack problem.",
+    "tags": ["Recursion and Dynamic Programming", "Project", "Knapsack"],
+    "profession": ["Software Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/knapsack-problem"
+  },
+  {
+    "id": "res_mm_doc_1",
+    "title": "MM: C++ Documentation on Smart Pointers",
+    "description": "The official standard library reference for C++ memory management and smart pointer usage.",
+    "tags": ["Memory Management", "Pointers", "C++", "Documentation"],
+    "profession": ["Embedded Developer"],
+    "type": "doc",
+    "link": "https://en.cppreference.com/w/cpp/memory"
+  },
+  {
+    "id": "res_mm_doc_2",
+    "title": "MM: Tutorial on Malloc and Free in C",
+    "description": "Detailed guide on manual memory allocation and deallocation in the C language.",
+    "tags": ["Memory Management", "C", "Documentation", "Fundamentals"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://www.tutorialspoint.com/cprogramming/c_dynamic_memory_allocation.htm"
+  },
+  {
+    "id": "res_mm_vid_1",
+    "title": "MM: Heap vs. Stack Memory in C",
+    "description": "Clear explanation of memory allocation differences, scope, and lifetime of variables on the Heap and Stack.",
+    "tags": ["Memory Management", "Pointers", "C", "Video", "Low-Level"],
+    "profession": ["Embedded Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=wJ1L2nSIV1s"
+  },
+  {
+    "id": "res_mm_vid_2",
+    "title": "MM: C++ Smart Pointers Explained",
+    "description": "A modern look at memory management using `unique_ptr`, `shared_ptr`, and `weak_ptr` to avoid memory leaks.",
+    "tags": ["Memory Management", "Pointers", "C++", "Video", "Advanced"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=UOB7-B2MfwA"
+  },
+  {
+    "id": "res_mm_proj_1",
+    "title": "MM: Simple Custom Memory Allocator (Project)",
+    "description": "A challenging project to implement a basic `malloc` and `free` using raw C memory functions.",
+    "tags": ["Memory Management", "C", "Project", "Low-Level"],
+    "profession": ["Embedded Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/memory-allocator-c"
+  },
+  {
+    "id": "res_python_prog_doc_1",
+    "title": "Python: Official Documentation (Iterators and Generators)",
+    "description": "Official reference on iterators, generators, and the `yield` keyword for memory-efficient data processing.",
+    "tags": ["Python Programming", "Advanced", "Documentation", "Generators"],
+    "profession": ["Data Scientist"],
+    "type": "doc",
+    "link": "https://docs.python.org/3/howto/functional.html"
+  },
+  {
+    "id": "res_python_prog_doc_2",
+    "title": "Python: Real Python Intermediate Articles Collection",
+    "description": "A curated collection of practical articles covering intermediate topics like exception handling and custom classes.",
+    "tags": ["Python Programming", "Intermediate", "Documentation", "Best Practices"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://realpython.com/tutorials/intermediate/"
+  },
+  {
+    "id": "res_python_prog_vid_1",
+    "title": "Python: Async and Await Masterclass",
+    "description": "In-depth guide to Python's asynchronous features, including `asyncio` and coroutines for high-performance network programming.",
+    "tags": ["Python Programming", "Async", "Concurrency", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=9kZ6K1J_zPI"
+  },
+  {
+    "id": "res_python_prog_vid_2",
+    "title": "Python: Mastering Decorators",
+    "description": "Tutorial on creating and understanding Python decorators for function wrapping and meta-programming.",
+    "tags": ["Python Programming", "Advanced", "Decorators", "Video"],
+    "profession": ["Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=r7Dtus7N4pI"
+  },
+  {
+    "id": "res_python_prog_proj_1",
+    "title": "Python: Simple Flask Web Scraper (Project)",
+    "description": "A small project demonstrating a simple web application using Flask to scrape data from a public website.",
+    "tags": ["Python Programming", "Project", "Flask", "Web Scraping"],
+    "profession": ["Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/python-web-scraper"
+  },
+  {
+    "id": "res_java_prog_doc_1",
+    "title": "Java: Baeldung Guides on Concurrency",
+    "description": "In-depth written guides covering complex Java topics like synchronization, volatile keywords, and the Java Memory Model (JMM).",
+    "tags": ["Java Programming", "Concurrency", "Documentation", "Reference", "Advanced"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://www.baeldung.com/java-multithreading"
+  },
+  {
+    "id": "res_java_prog_doc_2",
+    "title": "Java: Oracle Official Guide to the Collections Framework",
+    "description": "The primary source documentation on Java's powerful Collections Framework: Lists, Sets, Maps, and their thread-safe variants.",
+    "tags": ["Java Programming", "Fundamentals", "Documentation", "Collections"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html"
+  },
+  {
+    "id": "res_java_prog_vid_1",
+    "title": "Java: Multithreading and Concurrency Deep Dive",
+    "description": "Comprehensive tutorial on Java's `ExecutorService`, locks, semaphores, and synchronization techniques for robust concurrency.",
+    "tags": ["Java Programming", "Concurrency", "Multithreading", "Video", "Advanced"],
+    "profession": ["Software Engineer", "Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=SUeM1iG2pH8"
+  },
+  {
+    "id": "res_java_prog_vid_2",
+    "title": "Java: Spring Boot REST API Crash Course",
+    "description": "A practical guide to building and deploying a simple RESTful API using the Spring Boot framework.",
+    "tags": ["Java Programming", "Spring Boot", "REST", "Video", "Backend"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=mP1_1tUsQOY"
+  },
+  {
+    "id": "res_java_prog_proj_1",
+    "title": "Java: Simple Spring Boot REST API Starter (Project)",
+    "description": "A basic template for building RESTful web services using the Spring Boot framework, complete with data models and basic endpoints.",
+    "tags": ["Java Programming", "Spring Boot", "REST", "Project", "Backend"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/java-rest-api"
+  },
+  {
+    "id": "res_cpp_dev_doc_1",
+    "title": "C/C++: Google C++ Style Guide",
+    "description": "The industry-standard guide for formatting, best practices, and code conventions in large-scale C++ projects.",
+    "tags": ["C/C++ Development", "C++", "Documentation", "Best Practices"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://google.github.io/styleguide/cppguide.html"
+  },
+  {
+    "id": "res_cpp_dev_doc_2",
+    "title": "C/C++: CppReference Complete Standard Library Documentation",
+    "description": "The primary reference for the C++ standard library, including algorithms, containers, and utilities.",
+    "tags": ["C/C++ Development", "C++", "Documentation", "Reference"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://en.cppreference.com/w/cpp/language"
+  },
+  {
+    "id": "res_cpp_dev_vid_1",
+    "title": "C/C++: Modern C++ (C++17) Full Course",
+    "description": "Covers essential modern features like `std::optional`, structured bindings, and lambda expressions.",
+    "tags": ["C/C++ Development", "C++", "Modern C++", "Video", "Advanced"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=1VRr0C8b3QU"
+  },
+  {
+    "id": "res_cpp_dev_vid_2",
+    "title": "C/C++: Templates and Generics",
+    "description": "A focused tutorial on writing generic, type-safe code using C++ templates for functions and classes.",
+    "tags": ["C/C++ Development", "C++", "Templates", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=TJSW4y2oF7o"
+  },
+  {
+    "id": "res_cpp_dev_proj_1",
+    "title": "C/C++: Simple Console Game (Tic-Tac-Toe) (Project)",
+    "description": "A beginner project to practice input/output, control flow, and basic game logic in C++.",
+    "tags": ["C/C++ Development", "C++", "Project", "Game Dev"],
+    "profession": ["Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/cpp-tic-tac-toe"
+  },
+  {
+    "id": "res_js_es6_doc_1",
+    "title": "JS: MDN Web Docs - JavaScript Guide",
+    "description": "The definitive, comprehensive documentation for all JavaScript features, syntax, and built-in objects.",
+    "tags": ["JavaScript (ES6+)", "Documentation", "Reference", "MDN"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+  },
+  {
+    "id": "res_js_es6_doc_2",
+    "title": "JS: ECMAScript Official Specification (ES6+ Features)",
+    "description": "The technical reference for all modern JavaScript features, including let/const, arrow functions, and classes.",
+    "tags": ["JavaScript (ES6+)", "Advanced", "Documentation", "Reference"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://tc39.es/ecma262/"
+  },
+  {
+    "id": "res_js_es6_vid_1",
+    "title": "JS: Asynchronous JavaScript (Promises, Async/Await)",
+    "description": "Mastering the event loop, Promises, and the modern `async`/`await` syntax for handling asynchronous operations.",
+    "tags": ["JavaScript (ES6+)", "Async", "Video", "Fundamentals"],
+    "profession": ["Full-Stack Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=8aGhZQyoFbQ"
+  },
+  {
+    "id": "res_js_es6_vid_2",
+    "title": "JS: Advanced Concepts (Closures, Prototype)",
+    "description": "Detailed tutorial covering advanced JS topics like the Prototype chain, scope, and closures.",
+    "tags": ["JavaScript (ES6+)", "Advanced", "Closures", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=v2tJ3nzAlOE"
+  },
+  {
+    "id": "res_js_es6_proj_1",
+    "title": "JS: Weather App using Fetch API (Project)",
+    "description": "A small project demonstrating API calls, JSON handling, and updating the DOM using vanilla JavaScript.",
+    "tags": ["JavaScript (ES6+)", "Project", "API", "Frontend"],
+    "profession": ["Frontend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/javascript-weather-app"
+  },
+  {
+    "id": "res_typescript_doc_1",
+    "title": "TS: TypeScript Official Handbook (Generics and Classes)",
+    "description": "The primary documentation covering the core language features, including how to define and use generics.",
+    "tags": ["TypeScript", "Documentation", "Reference", "Fundamentals"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://www.typescriptlang.org/docs/handbook/classes.html"
+  },
+  {
+    "id": "res_typescript_doc_2",
+    "title": "TS: TypeScript Documentation on Advanced Utility Types",
+    "description": "Detailed reference on conditional types and advanced type manipulations essential for complex library development.",
+    "tags": ["TypeScript", "Advanced", "Typing", "Documentation"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://www.typescriptlang.org/docs/handbook/utility-types.html"
+  },
+  {
+    "id": "res_typescript_vid_1",
+    "title": "TS: TypeScript Crash Course",
+    "description": "A fast-paced guide to basic and intermediate TypeScript features, covering types, interfaces, and classes.",
+    "tags": ["TypeScript", "Fundamentals", "Video", "Frontend"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=BwuLxPH8IDs"
+  },
+  {
+    "id": "res_typescript_vid_2",
+    "title": "TS: Advanced Types and Utility Types",
+    "description": "In-depth tutorial on complex typing, generics, and using utility types like `Partial`, `Pick`, and `Omit`.",
+    "tags": ["TypeScript", "Advanced", "Typing", "Video"],
+    "profession": ["Full-Stack Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=0C3Ite0kT8o"
+  },
+  {
+    "id": "res_typescript_proj_1",
+    "title": "TS: TypeScript + Node.js API Starter (Project)",
+    "description": "A project template for building a strongly-typed backend API using TypeScript and Node.js.",
+    "tags": ["TypeScript", "Node.js", "Project", "Backend"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/typescript-starter"
+  },
+  {
+    "id": "res_fe_doc_1",
+    "title": "FE: MDN Web Docs - HTML and CSS Reference",
+    "description": "The essential, primary documentation for all HTML elements and CSS properties.",
+    "tags": ["Frontend Development (HTML, CSS, JS)", "HTML", "CSS", "Documentation", "Reference"],
+    "profession": ["Web Developer"],
+    "type": "doc",
+    "link": "https://developer.mozilla.org/en-US/docs/Web"
+  },
+  {
+    "id": "res_fe_doc_2",
+    "title": "FE: W3Schools Guide to CSS Selectors and Layouts",
+    "description": "Beginner-friendly tutorials covering basic CSS, selectors, positioning, and modern layout techniques like Flexbox.",
+    "tags": ["Frontend Development (HTML, CSS, JS)", "CSS", "Fundamentals", "Documentation"],
+    "profession": ["Web Developer"],
+    "type": "doc",
+    "link": "https://www.w3schools.com/css/"
+  },
+  {
+    "id": "res_fe_vid_1",
+    "title": "FE: Responsive Web Design Fundamentals",
+    "description": "Full course on HTML structure, semantic CSS, Flexbox, and Grid for building websites that look good on all devices.",
+    "tags": ["Frontend Development (HTML, CSS, JS)", "HTML", "CSS", "Responsive Design", "Video"],
+    "profession": ["Web Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=srvUrASNj0s"
+  },
+  {
+    "id": "res_fe_vid_2",
+    "title": "FE: JavaScript DOM Manipulation Tutorial",
+    "description": "Focus on using vanilla JavaScript to select elements, handle events, and dynamically update the webpage.",
+    "tags": ["Frontend Development (HTML, CSS, JS)", "JavaScript", "DOM", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=5fb2aB0M4k0"
+  },
+  {
+    "id": "res_fe_proj_1",
+    "title": "FE: Basic Personal Portfolio Website (Project)",
+    "description": "A hands-on project to build a professional multi-page portfolio website using HTML, CSS, and basic JavaScript.",
+    "tags": ["Frontend Development (HTML, CSS, JS)", "HTML", "CSS", "Project", "Portfolio"],
+    "profession": ["Web Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/portfolio-website"
+  },
+  {
+    "id": "res_react_doc_1",
+    "title": "React: Official Documentation on Functional Components",
+    "description": "The primary reference for functional components, component lifecycle, and standard React best practices.",
+    "tags": ["React.js and Component-Based UI", "React", "Documentation", "Reference"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://react.dev/reference/react"
+  },
+  {
+    "id": "res_react_doc_2",
+    "title": "React: Official Documentation on State and Props",
+    "description": "A foundational guide explaining component inputs (props) and managing internal component data (state).",
+    "tags": ["React.js and Component-Based UI", "React", "Documentation", "Fundamentals"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://react.dev/learn/managing-state"
+  },
+  {
+    "id": "res_react_vid_1",
+    "title": "React: Mastering React Hooks (useState, useEffect)",
+    "description": "Detailed guide on the two most important React Hooks for state and side-effects in functional components.",
+    "tags": ["React.js and Component-Based UI", "React", "Hooks", "Video", "Fundamentals"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=Lv0cP7v6E7o"
+  },
+  {
+    "id": "res_react_vid_2",
+    "title": "React: State Management with Redux/Context API",
+    "description": "Tutorial comparing and implementing global state management solutions like Redux and the Context API.",
+    "tags": ["React.js and Component-Based UI", "React", "State Management", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=CVpUuw9XSjY"
+  },
+  {
+    "id": "res_react_proj_1",
+    "title": "React: Simple To-Do List Application (Project)",
+    "description": "A hands-on project implementing state management, component composition, and prop drilling in a classic To-Do app.",
+    "tags": ["React.js and Component-Based UI", "React", "Project", "State Management"],
+    "profession": ["Frontend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/react-todo-app"
+  },
+  {
+    "id": "res_be_doc_1",
+    "title": "BE: Express.js Official Guide and Middleware Documentation",
+    "description": "The primary source for all Express.js features, including routing, middleware, and request handling.",
+    "tags": ["Backend Development (Node.js, Express)", "Node.js", "Express", "Documentation", "Reference"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://expressjs.com/en/starter/hello-world.html"
+  },
+  {
+    "id": "res_be_doc_2",
+    "title": "BE: Node.js Official Documentation on HTTP Module",
+    "description": "Technical reference for Node.js native HTTP module, which forms the basis for all web communication.",
+    "tags": ["Backend Development (Node.js, Express)", "Node.js", "HTTP", "Documentation", "Technical"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://nodejs.org/api/http.html"
+  },
+  {
+    "id": "res_be_vid_1",
+    "title": "BE: Node.js and Express API Tutorial",
+    "description": "Full crash course on building a RESTful API from scratch using Node.js, Express, and setting up routing.",
+    "tags": ["Backend Development (Node.js, Express)", "Node.js", "Express", "API", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=l8WPWK9mS5M"
+  },
+  {
+    "id": "res_be_vid_2",
+    "title": "BE: Authentication with Node.js and JWT",
+    "description": "Tutorial covering user registration, login, and securing endpoints using JSON Web Tokens (JWT).",
+    "tags": ["Backend Development (Node.js, Express)", "Node.js", "Authentication", "Security", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=mbsmsGlYVM0"
+  },
+  {
+    "id": "res_be_proj_1",
+    "title": "BE: Node.js Authentication API (Project)",
+    "description": "A hands-on project to build a complete authentication API using Express, including user models and JWT implementation.",
+    "tags": ["Backend Development (Node.js, Express)", "Node.js", "Project", "Authentication", "Security"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/node-js-authentication"
+  },
+  {
+    "id": "res_fullstack_doc_1",
+    "title": "Full-Stack: MERN Stack Documentation and Guides",
+    "description": "The official MongoDB guides on how to integrate the MERN stack components for full-stack application development.",
+    "tags": ["Full-Stack Web Development", "MERN", "Documentation", "Reference"],
+    "profession": ["Full-Stack Developer"],
+    "type": "doc",
+    "link": "https://www.mongodb.com/mern-stack"
+  },
+  {
+    "id": "res_fullstack_doc_2",
+    "title": "Full-Stack: Authentication and Authorization Guide",
+    "description": "Detailed guide on implementing role-based access control (RBAC) and securing full-stack applications with tokens.",
+    "tags": ["Full-Stack Web Development", "Security", "Authentication", "Documentation"],
+    "profession": ["Full-Stack Developer", "Security Engineer"],
+    "type": "doc",
+    "link": "https://jwt.io/introduction"
+  },
+  {
+    "id": "res_fullstack_vid_1",
+    "title": "Full-Stack: MERN Stack Complete Tutorial",
+    "description": "A complete, project-based video course covering MongoDB, Express, React, and Node.js (MERN) integration.",
+    "tags": ["Full-Stack Web Development", "MERN", "Video", "Complete Course"],
+    "profession": ["Full-Stack Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=7CqJlxBYj-M"
+  },
+  {
+    "id": "res_fullstack_vid_2",
+    "title": "Full-Stack: Setting up CI/CD for Full-Stack Apps",
+    "description": "Tutorial on automating deployment pipelines for both frontend and backend services using GitHub Actions.",
+    "tags": ["Full-Stack Web Development", "DevOps", "CI/CD", "Deployment", "Video"],
+    "profession": ["Full-Stack Developer", "DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=9yH8n2e-Svo"
+  },
+  {
+    "id": "res_fullstack_proj_1",
+    "title": "Full-Stack: Simple MERN Blog Application (Project)",
+    "description": "A hands-on project to build a full CRUD blog application, demonstrating database integration and API calls.",
+    "tags": ["Full-Stack Web Development", "MERN", "Project", "CRUD"],
+    "profession": ["Full-Stack Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/mern-stack"
+  },
+  {
+    "id": "res_nextjs_doc_1",
+    "title": "Next.js: Official Documentation on Data Fetching",
+    "description": "The definitive guide to data retrieval methods: getServerSideProps, getStaticProps, and API routes.",
+    "tags": ["Next.js / Server-side Rendering (SSR)", "SSR", "Documentation", "Reference"],
+    "profession": ["Full-Stack Developer"],
+    "type": "doc",
+    "link": "https://nextjs.org/docs/basic-features/data-fetching"
+  },
+  {
+    "id": "res_nextjs_doc_2",
+    "title": "Next.js: Official Documentation on Server Components",
+    "description": "Technical reference for the modern approach to building React applications with server-side logic and components.",
+    "tags": ["Next.js / Server-side Rendering (SSR)", "React", "Documentation", "Advanced"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+  },
+  {
+    "id": "res_nextjs_vid_1",
+    "title": "Next.js: Full App Router Course",
+    "description": "Complete tutorial on Next.js, covering App Router, Server Components, and client-side rendering.",
+    "tags": ["Next.js / Server-side Rendering (SSR)", "React", "SSR", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=2IPS-8kAq2U"
+  },
+  {
+    "id": "res_nextjs_vid_2",
+    "title": "Next.js: Static Site Generation (SSG) Explained",
+    "description": "Focused video on optimization techniques like SSG and Incremental Static Regeneration (ISR) for faster page loads.",
+    "tags": ["Next.js / Server-side Rendering (SSR)", "SSG", "Optimization", "Video"],
+    "profession": ["Frontend Developer", "Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=pjdWcv3yNco"
+  },
+  {
+    "id": "res_nextjs_proj_1",
+    "title": "Next.js: Simple E-commerce Site Starter (Project)",
+    "description": "A boilerplate project demonstrating a Next.js frontend with dynamic routing and data fetching for an e-commerce site.",
+    "tags": ["Next.js / Server-side Rendering (SSR)", "React", "Project", "E-commerce"],
+    "profession": ["Frontend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/nextjs-ecommerce"
+  },
+  {
+    "id": "res_android_doc_1",
+    "title": "Android: Official Developers Guide",
+    "description": "The primary documentation covering all Android components, architecture, and API references.",
+    "tags": ["Android Development (Kotlin/Java)", "Documentation", "Reference", "Official"],
+    "profession": ["Android Developer"],
+    "type": "doc",
+    "link": "https://developer.android.com/guide"
+  },
+  {
+    "id": "res_android_doc_2",
+    "title": "Android: Jetpack Compose Documentation (Modern UI)",
+    "description": "Reference for Google's modern, declarative UI toolkit for building native Android UIs (Compose).",
+    "tags": ["Android Development (Kotlin/Java)", "Compose", "Documentation", "Advanced"],
+    "profession": ["Mobile Developer"],
+    "type": "doc",
+    "link": "https://developer.android.com/jetpack/compose"
+  },
+  {
+    "id": "res_android_vid_1",
+    "title": "Android: Kotlin Fundamentals Course",
+    "description": "Full beginner course covering Kotlin syntax, Android Studio setup, and basic application lifecycle.",
+    "tags": ["Android Development (Kotlin/Java)", "Kotlin", "Fundamentals", "Video"],
+    "profession": ["Android Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=F9UC9DY-vIU"
+  },
+  {
+    "id": "res_android_vid_2",
+    "title": "Android: Building a Simple App with Activities and Layouts",
+    "description": "Practical tutorial on creating UI layouts with XML and managing application flow with Activities and Intents.",
+    "tags": ["Android Development (Kotlin/Java)", "Android Studio", "UI/UX", "Video"],
+    "profession": ["Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=EOfCEhWq8sg"
+  },
+  {
+    "id": "res_android_proj_1",
+    "title": "Android: Basic Calculator App (Project)",
+    "description": "A beginner project to practice input handling, basic logic, and XML layout creation in Android Studio.",
+    "tags": ["Android Development (Kotlin/Java)", "Project", "Fundamentals", "Java"],
+    "profession": ["Mobile Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/android-calculator"
+  },
+  {
+    "id": "res_ios_doc_1",
+    "title": "iOS: Apple Developer Documentation (SwiftUI)",
+    "description": "The official and primary reference for Apple's modern, declarative UI framework (SwiftUI).",
+    "tags": ["iOS Development (Swift)", "SwiftUI", "Documentation", "Reference"],
+    "profession": ["iOS Developer"],
+    "type": "doc",
+    "link": "https://developer.apple.com/documentation/swiftui"
+  },
+  {
+    "id": "res_ios_doc_2",
+    "title": "iOS: Swift Official Language Guide",
+    "description": "The comprehensive language reference for Swift, covering syntax, types, and protocol-oriented programming.",
+    "tags": ["iOS Development (Swift)", "Swift", "Documentation", "Fundamentals"],
+    "profession": ["Mobile Developer"],
+    "type": "doc",
+    "link": "https://docs.swift.org/swift-book/"
+  },
+  {
+    "id": "res_ios_vid_1",
+    "title": "iOS: Swift and SwiftUI Crash Course",
+    "description": "Fast-paced introduction to the Swift language, Xcode, and building UIs using the modern SwiftUI framework.",
+    "tags": ["iOS Development (Swift)", "Swift", "SwiftUI", "Video", "Fundamentals"],
+    "profession": ["iOS Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=Z5W1t4sKC3M"
+  },
+  {
+    "id": "res_ios_vid_2",
+    "title": "iOS: Data Persistence and Core Data",
+    "description": "Tutorial on managing data storage within an iOS app using Core Data and basic data modeling.",
+    "tags": ["iOS Development (Swift)", "Core Data", "Data Persistence", "Video"],
+    "profession": ["Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=9D1E1J2Y4gU"
+  },
+  {
+    "id": "res_ios_proj_1",
+    "title": "iOS: Simple Calculator App (Project)",
+    "description": "A foundational project for practicing button handling, UI layout, and basic arithmetic logic in Swift/SwiftUI.",
+    "tags": ["iOS Development (Swift)", "Project", "Swift", "Fundamentals"],
+    "profession": ["Mobile Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/ios-calculator"
+  },
+  {
+    "id": "res_rnf_doc_1",
+    "title": "RN/Flutter: React Native Official Docs",
+    "description": "The primary reference for components, APIs, and mobile-specific modules in the React Native ecosystem.",
+    "tags": ["React Native / Flutter", "React Native", "Documentation", "Reference"],
+    "profession": ["Mobile Developer"],
+    "type": "doc",
+    "link": "https://reactnative.dev/docs/getting-started"
+  },
+  {
+    "id": "res_rnf_doc_2",
+    "title": "RN/Flutter: Flutter Official Documentation",
+    "description": "The primary resource for Flutter widgets, layout models, and state management using the Dart language.",
+    "tags": ["React Native / Flutter", "Flutter", "Documentation", "Reference"],
+    "profession": ["Mobile Developer"],
+    "type": "doc",
+    "link": "https://docs.flutter.dev/"
+  },
+  {
+    "id": "res_rnf_vid_1",
+    "title": "RN/Flutter: React Native Full Course",
+    "description": "A comprehensive video guide on building cross-platform apps using JavaScript and the React Native framework.",
+    "tags": ["React Native / Flutter", "React Native", "Video", "Cross-Platform"],
+    "profession": ["Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=mJ3bGvy0WAY"
+  },
+  {
+    "id": "res_rnf_vid_2",
+    "title": "RN/Flutter: Flutter Crash Course",
+    "description": "Fast-paced introduction to the Flutter framework and Dart language for building beautiful, native applications.",
+    "tags": ["React Native / Flutter", "Flutter", "Dart", "Video"],
+    "profession": ["Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=pTJJsmeNLdI"
+  },
+  {
+    "id": "res_rnf_proj_1",
+    "title": "RN/Flutter: Simple E-commerce UI App (Project)",
+    "description": "A project focused on building a clean, modern e-commerce mobile UI using either React Native or Flutter.",
+    "tags": ["React Native / Flutter", "Project", "UI/UX", "E-commerce"],
+    "profession": ["Mobile Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/react-native-ecommerce"
+  },
+  {
+    "id": "res_pwa_doc_1",
+    "title": "PWA: MDN Web Docs - Service Workers API",
+    "description": "The technical reference for the Service Workers API, which enables caching and background synchronization.",
+    "tags": ["Progressive Web Apps (PWA)", "Service Workers", "Documentation", "Reference"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API"
+  },
+  {
+    "id": "res_pwa_doc_2",
+    "title": "PWA: Google Developers Guide to PWAs",
+    "description": "Best practices, checklists, and tools from Google for building high-quality, reliable Progressive Web Apps.",
+    "tags": ["Progressive Web Apps (PWA)", "Documentation", "Best Practices", "Google"],
+    "profession": ["Frontend Developer"],
+    "type": "doc",
+    "link": "https://web.dev/progressive-web-apps/"
+  },
+  {
+    "id": "res_pwa_vid_1",
+    "title": "PWA: Progressive Web Apps Tutorial",
+    "description": "Comprehensive guide on service workers, manifest files, and making web apps installable.",
+    "tags": ["Progressive Web Apps (PWA)", "Service Workers", "Frontend", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=4XZ11sTCFlQ"
+  },
+  {
+    "id": "res_pwa_vid_2",
+    "title": "PWA: Building an Offline-First PWA",
+    "description": "Focused tutorial on caching strategies and offline data access using PWA best practices.",
+    "tags": ["Progressive Web Apps (PWA)", "Offline", "Advanced", "Video"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=cmGr0RszHc8"
+  },
+  {
+    "id": "res_pwa_proj_1",
+    "title": "PWA: Simple Offline PWA Boilerplate (Project)",
+    "description": "A boilerplate project demonstrating the minimum required files (manifest, service worker) to create an installable PWA.",
+    "tags": ["Progressive Web Apps (PWA)", "Project", "Service Workers", "Manifest"],
+    "profession": ["Frontend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/pwa-boilerplate"
+  },
+  {
+    "id": "res_mobile_deploy_doc_1",
+    "title": "Mobile Deploy: Fastlane Official Documentation",
+    "description": "The primary reference for setting up lanes, actions, and tools for mobile CI/CD automation.",
+    "tags": ["Mobile App Deployment & CI/CD", "CI/CD", "Documentation", "Fastlane"],
+    "profession": ["DevOps Engineer", "Mobile Developer"],
+    "type": "doc",
+    "link": "https://docs.fastlane.tools/"
+  },
+  {
+    "id": "res_mobile_deploy_doc_2",
+    "title": "Mobile Deploy: GitHub Actions for Mobile CI/CD",
+    "description": "Documentation on configuring CI/CD workflows using GitHub Actions specifically for Android and iOS builds.",
+    "tags": ["Mobile App Deployment & CI/CD", "GitHub Actions", "CI/CD", "Documentation"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-mobile-apps"
+  },
+  {
+    "id": "res_mobile_deploy_vid_1",
+    "title": "Mobile Deploy: Fastlane for CI/CD Automation",
+    "description": "Guide to using Fastlane for automating testing, building, and deploying mobile apps to app stores.",
+    "tags": ["Mobile App Deployment & CI/CD", "CI/CD", "Fastlane", "Video"],
+    "profession": ["DevOps Engineer", "Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=5c7uV_Ds4pg"
+  },
+  {
+    "id": "res_mobile_deploy_vid_2",
+    "title": "Mobile Deploy: App Store and Play Store Submission Guide",
+    "description": "Step-by-step process for preparing metadata, screenshots, and submitting final builds to both app stores.",
+    "tags": ["Mobile App Deployment & CI/CD", "Deployment", "App Store", "Video"],
+    "profession": ["Mobile Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ZyN5ZZ4pL4E"
+  },
+  {
+    "id": "res_mobile_deploy_proj_1",
+    "title": "Mobile Deploy: CI/CD Pipeline for Mobile Apps (Project)",
+    "description": "A template repository demonstrating a complete CI/CD setup for a mobile app using a cloud build service.",
+    "tags": ["Mobile App Deployment & CI/CD", "Project", "CI/CD", "Deployment"],
+    "profession": ["DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/mobile-ci-cd"
+  },
+  {
+    "id": "res_git_doc_1",
+    "title": "VC: Git Official Documentation",
+    "description": "The definitive technical reference for all Git commands and concepts, including the Git book.",
+    "tags": ["Version Control (Git & GitHub)", "Git", "Documentation", "Reference"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://git-scm.com/doc"
+  },
+  {
+    "id": "res_git_doc_2",
+    "title": "VC: GitHub Documentation on Pull Requests and Forks",
+    "description": "Guides on collaborative workflows, pull request reviews, and managing repository forks.",
+    "tags": ["Version Control (Git & GitHub)", "GitHub", "Documentation", "Collaboration"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://docs.github.com/en/pull-requests"
+  },
+  {
+    "id": "res_git_vid_1",
+    "title": "VC: Git and GitHub Complete Course",
+    "description": "Full course covering Git fundamentals, branching, merging, pull requests, and remote repository management.",
+    "tags": ["Version Control (Git & GitHub)", "Git", "GitHub", "Video", "Fundamentals"],
+    "profession": ["Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=apGV9Kg7W0g"
+  },
+  {
+    "id": "res_git_vid_2",
+    "title": "VC: Advanced Git Techniques (Rebase, Cherry-Pick)",
+    "description": "Focused tutorial on advanced commands like rebase, cherry-pick, and resolving complex merge conflicts.",
+    "tags": ["Version Control (Git & GitHub)", "Git", "Advanced", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=0o0g7lKnkI4"
+  },
+  {
+    "id": "res_git_proj_1",
+    "title": "VC: Git Exercises Repository (Project)",
+    "description": "A repository designed specifically to help you practice common Git commands and resolve typical conflict scenarios.",
+    "tags": ["Version Control (Git & GitHub)", "Git", "Project", "Practice"],
+    "profession": ["Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/git-exercises"
+  },
+  {
+    "id": "res_test_doc_1",
+    "title": "Testing: Pytest Official Documentation",
+    "description": "The primary documentation for the Pytest framework, including fixtures, parametrization, and advanced configuration.",
+    "tags": ["Testing & Debugging", "Pytest", "Documentation", "Reference"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://docs.pytest.org/en/stable/"
+  },
+  {
+    "id": "res_test_doc_2",
+    "title": "Testing: Debugging in VS Code Guide",
+    "description": "A guide on setting breakpoints, inspecting variables, and using the built-in debugging tools in Visual Studio Code.",
+    "tags": ["Testing & Debugging", "Debugging", "VS Code", "Documentation"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://code.visualstudio.com/docs/editor/debugging"
+  },
+  {
+    "id": "res_test_vid_1",
+    "title": "Testing: Pytest Unit Testing Full Tutorial",
+    "description": "Comprehensive guide to writing, organizing, and running unit and integration tests using the Python Pytest framework.",
+    "tags": ["Testing & Debugging", "Pytest", "Unit Testing", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=bbp_849-RZ4"
+  },
+  {
+    "id": "res_test_vid_2",
+    "title": "Testing: Principles of Test-Driven Development",
+    "description": "A conceptual explanation of TDD (Test-Driven Development) and how to adopt the methodology in a project.",
+    "tags": ["Testing & Debugging", "TDD", "Methodology", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=AoVb1N6a4LY"
+  },
+  {
+    "id": "res_test_proj_1",
+    "title": "Testing: Test-Driven Development (TDD) Example Project",
+    "description": "A repository containing a small project implemented using a TDD workflow, demonstrating the test-first approach.",
+    "tags": ["Testing & Debugging", "TDD", "Project", "Practice"],
+    "profession": ["Software Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/tdd-examples"
+  },
+  {
+    "id": "res_design_doc_1",
+    "title": "Design: Refactoring Guru Design Patterns Documentation",
+    "description": "High-quality, detailed explanations of all major design patterns with comprehensive code examples.",
+    "tags": ["Design Patterns & Architecture", "Design Patterns", "Documentation", "Reference"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://refactoring.guru/design-patterns"
+  },
+  {
+    "id": "res_design_doc_2",
+    "title": "Design: AWS Serverless Architecture Patterns",
+    "description": "Official guide to using serverless components (Lambda, API Gateway) to design scalable, cost-effective architectures.",
+    "tags": ["Design Patterns & Architecture", "Architecture", "Serverless", "Documentation"],
+    "profession": ["Cloud Engineer"],
+    "type": "doc",
+    "link": "https://docs.aws.amazon.com/lambda/latest/dg/serverless-architecture-patterns.html"
+  },
+  {
+    "id": "res_design_vid_1",
+    "title": "Design: Design Patterns in 10 Minutes",
+    "description": "A quick visual summary of the most common Creational, Structural, and Behavioral design patterns.",
+    "tags": ["Design Patterns & Architecture", "Design Patterns", "Video", "Fundamentals"],
+    "profession": ["Software Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=v9ejT8FO-7I"
+  },
+  {
+    "id": "res_design_vid_2",
+    "title": "Design: Understanding Microservices Architecture",
+    "description": "Conceptual guide to breaking down a monolithic application into smaller, independently deployable microservices.",
+    "tags": ["Design Patterns & Architecture", "Microservices", "Architecture", "Video"],
+    "profession": ["Software Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=CVCkh3sC2rY"
+  },
+  {
+    "id": "res_design_proj_1",
+    "title": "Design: Design Patterns Implementation Repository (Project)",
+    "description": "A repository containing clean code implementations of various design patterns in multiple languages (e.g., Java, Python).",
+    "tags": ["Design Patterns & Architecture", "Design Patterns", "Project", "Code Review"],
+    "profession": ["Software Architect"],
+    "type": "project",
+    "link": "https://github.com/topics/design-patterns-java"
+  },
+  {
+    "id": "res_clean_doc_1",
+    "title": "Clean Code: Martin Fowler's Refactoring Guide",
+    "description": "The definitive resource for understanding code smells and applying correct refactoring patterns to improve design.",
+    "tags": ["Clean Code & Code Refactoring", "Refactoring", "Documentation", "Reference"],
+    "profession": ["Software Engineer"],
+    "type": "doc",
+    "link": "https://martinfowler.com/books/refactoring.html"
+  },
+  {
+    "id": "res_clean_doc_2",
+    "title": "Clean Code: Clean Code Cheatsheet and Summary",
+    "description": "A quick reference guide summarizing the core principles from the 'Clean Code' book by Robert C. Martin.",
+    "tags": ["Clean Code & Code Refactoring", "Documentation", "Best Practices"],
+    "profession": ["Developer"],
+    "type": "doc",
+    "link": "https://github.com/ryanmcdermott/clean-code-javascript#readme"
+  },
+  {
+    "id": "res_clean_vid_1",
+    "title": "Clean Code: The Single Responsibility Principle",
+    "description": "A focused explanation of the SRP, a foundational principle for writing clean, modular code.",
+    "tags": ["Clean Code & Code Refactoring", "Clean Code", "SOLID", "Video"],
+    "profession": ["Software Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=2i2xa4xiM4U"
+  },
+  {
+    "id": "res_clean_vid_2",
+    "title": "Clean Code: Advanced Refactoring Techniques",
+    "description": "Tutorial on practical refactoring techniques like extract method, inline variable, and handling feature envy.",
+    "tags": ["Clean Code & Code Refactoring", "Refactoring", "Video", "Advanced"],
+    "profession": ["Senior Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=DC-pQPq0acs"
+  },
+  {
+    "id": "res_clean_proj_1",
+    "title": "Clean Code: Code Smells Refactoring Examples (Project)",
+    "description": "A repository dedicated to showing bad code examples and how they should be correctly refactored.",
+    "tags": ["Clean Code & Code Refactoring", "Refactoring", "Project", "Code Review"],
+    "profession": ["Software Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/code-refactoring-examples"
+  },
+  {
+    "id": "res_agile_doc_1",
+    "title": "Agile: Atlassian Guide to Agile and Scrum",
+    "description": "Official documentation covering the entire Agile methodology, including core values, principles, and implementation guides.",
+    "tags": ["Agile & DevOps Practices", "Agile", "Scrum", "Documentation"],
+    "profession": ["Project Manager"],
+    "type": "doc",
+    "link": "https://www.atlassian.com/agile"
+  },
+  {
+    "id": "res_agile_doc_2",
+    "title": "Agile: Documentation on Kanban and Workflow Management",
+    "description": "Guides on using the Kanban method for visual workflow management, measuring flow, and limiting work in progress.",
+    "tags": ["Agile & DevOps Practices", "Kanban", "Documentation", "Methodology"],
+    "profession": ["Project Manager"],
+    "type": "doc",
+    "link": "https://www.atlassian.com/agile/kanban"
+  },
+  {
+    "id": "res_agile_vid_1",
+    "title": "Agile: What is Scrum? Explained Simply",
+    "description": "A clear, concise explanation of the Scrum framework, roles (Scrum Master, Product Owner), and ceremonies (sprints, standups).",
+    "tags": ["Agile & DevOps Practices", "Agile", "Scrum", "Video", "Fundamentals"],
+    "profession": ["Project Manager"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=9TycLR0TqFA"
+  },
+  {
+    "id": "res_agile_vid_2",
+    "title": "Agile: DevOps Explained in 10 Minutes",
+    "description": "A conceptual guide to the culture, practices (CI/CD), and tools that define the DevOps methodology.",
+    "tags": ["Agile & DevOps Practices", "DevOps", "CI/CD", "Video"],
+    "profession": ["DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=XexnGHsCQXg"
+  },
+  {
+    "id": "res_agile_proj_1",
+    "title": "Agile: CI/CD Pipeline with GitHub Actions (Project)",
+    "description": "A template project for setting up a basic CI/CD pipeline using GitHub Actions to automate build and deployment.",
+    "tags": ["Agile & DevOps Practices", "DevOps", "Project", "CI/CD", "GitHub Actions"],
+    "profession": ["DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/github-actions-ci-cd"
+  },
+  {
+    "id": "res_sql_doc_1",
+    "title": "SQL: PostgreSQL Official Documentation (SQL Commands)",
+    "description": "The primary technical reference for all standard and advanced SQL commands and functions supported by PostgreSQL.",
+    "tags": ["SQL & Relational Databases", "SQL", "Documentation", "Reference"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://www.postgresql.org/docs/current/sql.html"
+  },
+  {
+    "id": "res_sql_doc_2",
+    "title": "SQL: SQL Joins and Query Optimization Guide",
+    "description": "Articles covering different types of joins (LEFT, RIGHT, FULL) and techniques for optimizing query performance using indexes.",
+    "tags": ["SQL & Relational Databases", "Optimization", "Joins", "Documentation"],
+    "profession": ["Backend Developer", "Data Analyst"],
+    "type": "doc",
+    "link": "https://www.w3schools.com/sql/"
+  },
+  {
+    "id": "res_sql_vid_1",
+    "title": "SQL: Advanced SQL Querying Full Course",
+    "description": "Comprehensive course covering advanced joins, subqueries, window functions, and stored procedures in SQL.",
+    "tags": ["SQL & Relational Databases", "SQL", "Advanced", "Video", "Database"],
+    "profession": ["Backend Developer", "Data Analyst"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ZTcUha5T3oU"
+  },
+  {
+    "id": "res_sql_vid_2",
+    "title": "SQL: Database Normalization Explained",
+    "description": "Detailed video explaining 1NF, 2NF, and 3NF to ensure efficient and consistent relational database design.",
+    "tags": ["SQL & Relational Databases", "Normalization", "Database", "Video"],
+    "profession": ["Database Administrator"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=UrYLY7QpnAA"
+  },
+  {
+    "id": "res_sql_proj_1",
+    "title": "SQL: Schema Design for E-commerce (Project)",
+    "description": "A project focused on designing a normalized database schema (tables, keys, relationships) for an online store.",
+    "tags": ["SQL & Relational Databases", "Database", "Project", "Schema Design"],
+    "profession": ["Database Administrator"],
+    "type": "project",
+    "link": "https://github.com/topics/sql-schema"
+  },
+  {
+    "id": "res_nosql_doc_1",
+    "title": "NoSQL: MongoDB Official Documentation",
+    "description": "The primary technical reference for all MongoDB features, including sharding, indexing, and the drivers.",
+    "tags": ["NoSQL (MongoDB, Firebase, etc.)", "MongoDB", "Documentation", "Reference"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://www.mongodb.com/docs/manual/"
+  },
+  {
+    "id": "res_nosql_doc_2",
+    "title": "NoSQL: Firestore (Firebase) Data Modeling Guide",
+    "description": "Documentation on structuring data effectively in a document database like Firestore, focusing on collections and subcollections.",
+    "tags": ["NoSQL (MongoDB, Firebase, etc.)", "Firebase", "Documentation", "Data Modeling"],
+    "profession": ["Full-Stack Developer"],
+    "type": "doc",
+    "link": "https://firebase.google.com/docs/firestore/manage-data/structure-data"
+  },
+  {
+    "id": "res_nosql_vid_1",
+    "title": "NoSQL: MongoDB Crash Course",
+    "description": "Full introductory course on MongoDB, covering installation, CRUD operations, and the document model.",
+    "tags": ["NoSQL (MongoDB, Firebase, etc.)", "MongoDB", "Database", "Video", "Fundamentals"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=EE8ZT5HYm88"
+  },
+  {
+    "id": "res_nosql_vid_2",
+    "title": "NoSQL: MongoDB Aggregation Framework Tutorial",
+    "description": "Detailed guide on using the aggregation pipeline for advanced data transformation and reporting in MongoDB.",
+    "tags": ["NoSQL (MongoDB, Firebase, etc.)", "MongoDB", "Advanced", "Video"],
+    "profession": ["Backend Developer", "Data Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=3W6m1h6UrII"
+  },
+  {
+    "id": "res_nosql_proj_1",
+    "title": "NoSQL: Node.js & MongoDB REST API (Project)",
+    "description": "A hands-on project to build a full REST API using the Mongoose ODM to interact with a MongoDB database.",
+    "tags": ["NoSQL (MongoDB, Firebase, etc.)", "MongoDB", "Project", "REST API"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/mongodb-rest-api"
+  },
+  {
+    "id": "res_orms_doc_1",
+    "title": "ORM: SQLAlchemy 2.0 Official ORM Documentation",
+    "description": "The primary technical reference for the modern SQLAlchemy ORM, focusing on best practices and expressive query construction.",
+    "tags": ["ORMs and Database Optimization", "SQLAlchemy", "Documentation", "Reference"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://docs.sqlalchemy.org/en/20/orm/index.html"
+  },
+  {
+    "id": "res_orms_doc_2",
+    "title": "ORM: Django ORM Query Optimization Guide",
+    "description": "Tips and techniques for writing efficient Django ORM queries, avoiding the N+1 problem, and using `select_related`/`prefetch_related`.",
+    "tags": ["ORMs and Database Optimization", "Django", "Optimization", "Documentation"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://docs.djangoproject.com/en/5.0/topics/db/optimization/"
+  },
+  {
+    "id": "res_orms_vid_1",
+    "title": "ORM: SQLAlchemy ORM Tutorial",
+    "description": "Comprehensive video guide on using SQLAlchemy for object-relational mapping in Python, including sessions and schema definition.",
+    "tags": ["ORMs and Database Optimization", "SQLAlchemy", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=OvhoYc1Gwts"
+  },
+  {
+    "id": "res_orms_vid_2",
+    "title": "ORM: Hibernate ORM Full Course",
+    "description": "Detailed course on the Hibernate ORM for Java, covering mapping, configuration, and advanced entity relationships.",
+    "tags": ["ORMs and Database Optimization", "Hibernate", "Java", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=Yv2x9r3R8rY"
+  },
+  {
+    "id": "res_orms_proj_1",
+    "title": "ORM: Python Flask/SQLAlchemy Project Template (Project)",
+    "description": "A repository demonstrating a clean, maintainable structure for a Python API using Flask and SQLAlchemy for database interaction.",
+    "tags": ["ORMs and Database Optimization", "SQLAlchemy", "Flask", "Project"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/sqlalchemy-orm"
+  },
+  {
+    "id": "res_apis_doc_1",
+    "title": "APIs: Best Practices for REST API Design",
+    "description": "Detailed written guide covering API versioning, idempotency, and resource naming conventions.",
+    "tags": ["APIs and RESTful Services", "API Design", "Documentation", "Best Practices"],
+    "profession": ["Software Architect", "API Engineer"],
+    "type": "doc",
+    "link": "https://restfulapi.net/"
+  },
+  {
+    "id": "res_apis_doc_2",
+    "title": "APIs: Documentation on OAuth 2.0 and API Security",
+    "description": "Technical documentation on implementing secure authentication and authorization mechanisms (OAuth 2.0, JWT).",
+    "tags": ["APIs and RESTful Services", "Security", "OAuth", "Documentation"],
+    "profession": ["API Engineer", "Security Engineer"],
+    "type": "doc",
+    "link": "https://oauth.net/2/"
+  },
+  {
+    "id": "res_apis_vid_1",
+    "title": "APIs: REST API Design and Best Practices",
+    "description": "Comprehensive guide on structuring RESTful URLs, using correct HTTP methods, and designing clear error responses.",
+    "tags": ["APIs and RESTful Services", "REST", "API Design", "Video"],
+    "profession": ["Backend Developer", "API Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ldYehZRhXto"
+  },
+  {
+    "id": "res_apis_vid_2",
+    "title": "APIs: HTTP Status Codes Explained",
+    "description": "A focused tutorial on the meaning and correct use of 2xx, 4xx, and 5xx HTTP status codes in API responses.",
+    "tags": ["APIs and RESTful Services", "HTTP", "Fundamentals", "Video"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=iZSlx9zQ2Uw"
+  },
+  {
+    "id": "res_apis_proj_1",
+    "title": "APIs: Python FastAPI REST API Starter (Project)",
+    "description": "A boilerplate project demonstrating a modern, high-performance Python API using FastAPI and Pydantic.",
+    "tags": ["APIs and RESTful Services", "FastAPI", "Project", "Python"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/fastapi-rest-api"
+  },
+  {
+    "id": "res_graphql_doc_1",
+    "title": "GraphQL: Official Documentation",
+    "description": "The primary technical reference for the GraphQL specification, covering all core concepts and best practices.",
+    "tags": ["GraphQL Fundamentals", "GraphQL", "API", "Documentation", "Reference", "Schemas", "Queries", "Mutations"],
+    "profession": ["Full-Stack Developer"],
+    "type": "doc",
+    "link": "https://graphql.org/learn/"
+  },
+  {
+    "id": "res_graphql_doc_2",
+    "title": "GraphQL: Apollo Server Documentation",
+    "description": "Guides for building production-ready GraphQL servers, including caching, security, and performance tuning.",
+    "tags": ["GraphQL Fundamentals", "Apollo", "Documentation", "Backend", "Caching", "Security"],
+    "profession": ["Backend Developer"],
+    "type": "doc",
+    "link": "https://www.apollographql.com/docs/apollo-server/"
+  },
+  {
+    "id": "res_graphql_vid_1",
+    "title": "GraphQL: Fundamentals and Schemas (Video)",
+    "description": "Comprehensive guide on creating GraphQL schemas, defining types, queries, and mutations.",
+    "tags": ["GraphQL Fundamentals", "GraphQL", "API", "Video", "Fundamentals", "Schemas", "Queries", "Mutations"],
+    "profession": ["Full-Stack Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ZQL7tL2S0oQ"
+  },
+  {
+    "id": "res_graphql_vid_2",
+    "title": "GraphQL: Apollo Server and Client Setup (Video)",
+    "description": "Tutorial on setting up a GraphQL server with Apollo and integrating the client-side library for data fetching.",
+    "tags": ["GraphQL Fundamentals", "Apollo", "Video", "Client-Server", "Backend", "Frontend"],
+    "profession": ["Frontend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=I6ypD7I_ZRs"
+  },
+  {
+    "id": "res_graphql_proj_1",
+    "title": "GraphQL: Server Implementation with Apollo (Project)",
+    "description": "A template project for setting up a GraphQL server using Apollo with a mocked or real database connection.",
+    "tags": ["GraphQL Fundamentals", "Apollo", "Project", "Backend", "Database", "Schemas"],
+    "profession": ["Backend Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/graphql-server"
+  },
+  {
+    "id": "res_cloud_doc_1",
+    "title": "Cloud: AWS Documentation on EC2 and S3",
+    "description": "Official documentation covering the two most fundamental AWS services: virtual machines (EC2) and object storage (S3).",
+    "tags": ["Cloud Computing (AWS, Azure, GCP)", "AWS", "Documentation", "Reference", "EC2", "S3", "Cloud Services"],
+    "profession": ["Cloud Engineer"],
+    "type": "doc",
+    "link": "https://docs.aws.amazon.com/ec2/index.html"
+  },
+  {
+    "id": "res_cloud_doc_2",
+    "title": "Cloud: Google Cloud Platform (GCP) Fundamentals Guide",
+    "description": "Google's official documentation covering core GCP services, networking, and security best practices.",
+    "tags": ["Cloud Computing (AWS, Azure, GCP)", "GCP", "Documentation", "Fundamentals", "Networking", "Security"],
+    "profession": ["Cloud Engineer"],
+    "type": "doc",
+    "link": "https://cloud.google.com/docs/getting-started"
+  },
+  {
+    "id": "res_cloud_vid_1",
+    "title": "Cloud: AWS Cloud Practitioner Full Course (Video)",
+    "description": "Complete beginner course covering fundamental AWS concepts, core services (EC2, S3, RDS), and billing.",
+    "tags": ["Cloud Computing (AWS, Azure, GCP)", "AWS", "Fundamentals", "Video", "EC2", "S3", "RDS"],
+    "profession": ["Cloud Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=SOTamWNgDKc"
+  },
+  {
+    "id": "res_cloud_vid_2",
+    "title": "Cloud: Serverless in 100 Seconds (Video)",
+    "description": "A rapid introduction to the serverless paradigm, explaining FaaS (Function-as-a-Service) using examples like AWS Lambda.",
+    "tags": ["Cloud Computing (AWS, Azure, GCP)", "Serverless", "Video", "Deployment", "FaaS", "AWS Lambda"],
+    "profession": ["Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ngX2O0iXyX4"
+  },
+  {
+    "id": "res_cloud_proj_1",
+    "title": "Cloud: Simple Web App Deployment to AWS S3 (Project)",
+    "description": "A beginner project focused on provisioning an S3 bucket, configuring hosting, and setting up a basic static website.",
+    "tags": ["Cloud Computing (AWS, Azure, GCP)", "AWS", "Project", "Deployment", "S3", "Web Hosting"],
+    "profession": ["Web Developer", "Cloud Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/aws-s3-deployment"
+  },
+  {
+    "id": "res_docker_doc_1",
+    "title": "Docker: Official Documentation for Getting Started",
+    "description": "The official user guide for installing Docker and understanding the basic commands and architecture of containerization.",
+    "tags": ["Docker & Containerization", "Docker", "Documentation", "Fundamentals", "Containerization", "DevOps"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://docs.docker.com/get-started/overview/"
+  },
+  {
+    "id": "res_docker_doc_2",
+    "title": "Docker: Best Practices for Writing Dockerfiles",
+    "description": "Advanced documentation on multi-stage builds, layer caching, and minimizing image size for production-ready containers.",
+    "tags": ["Docker & Containerization", "Docker", "Documentation", "Best Practices", "Dockerfile", "Optimization"],
+    "profession": ["Software Architect"],
+    "type": "doc",
+    "link": "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/"
+  },
+  {
+    "id": "res_docker_vid_1",
+    "title": "Docker: Containerization Crash Course (Video)",
+    "description": "A practical guide to Docker basics: Dockerfile, image creation, running containers, and using Docker Hub.",
+    "tags": ["Docker & Containerization", "Docker", "DevOps", "Video", "Dockerfile", "Docker Hub"],
+    "profession": ["DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=pg19Z8LL06I"
+  },
+  {
+    "id": "res_docker_vid_2",
+    "title": "Docker: Docker Compose for Multi-Container Apps (Video)",
+    "description": "Focused tutorial on orchestrating multiple services (e.g., app + database) using a single Docker Compose file.",
+    "tags": ["Docker & Containerization", "Docker Compose", "Microservices", "Video", "Orchestration"],
+    "profession": ["DevOps Engineer", "Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=HG6yIjSeqi8"
+  },
+  {
+    "id": "res_docker_proj_1",
+    "title": "Docker: Dockerizing a Simple Web App (Project)",
+    "description": "A hands-on project to create a Dockerfile for a basic Python or Node.js web application and run it as a container.",
+    "tags": ["Docker & Containerization", "Docker", "Project", "Python", "Node.js", "Web App"],
+    "profession": ["Developer", "DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/docker-python-app"
+  },
+  {
+    "id": "res_k8s_doc_1",
+    "title": "Kubernetes: Official Documentation",
+    "description": "The primary reference for Kubernetes concepts, API reference, and installation guides.",
+    "tags": ["Kubernetes & Microservices", "Kubernetes", "Documentation", "Reference", "K8s", "Microservices"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://kubernetes.io/docs/home/"
+  },
+  {
+    "id": "res_k8s_doc_2",
+    "title": "Kubernetes: Deployments and Rollouts Guide",
+    "description": "Guides on managing application lifecycle, rolling updates, and rollbacks using Kubernetes Deployment objects.",
+    "tags": ["Kubernetes & Microservices", "Deployment", "Documentation", "Advanced", "Rollouts", "K8s"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+  },
+  {
+    "id": "res_k8s_vid_1",
+    "title": "Kubernetes: Crash Course (Video)",
+    "description": "A fast-paced introduction to Kubernetes: pods, services, deployments, and basic kubectl commands.",
+    "tags": ["Kubernetes & Microservices", "Kubernetes", "K8s", "Video", "Fundamentals", "Pods", "kubectl"],
+    "profession": ["DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=s_o8dwzRlu4"
+  },
+  {
+    "id": "res_k8s_vid_2",
+    "title": "Kubernetes: Managing Microservices with Helm (Video)",
+    "description": "Tutorial on using Helm charts to package and deploy complex microservices applications efficiently.",
+    "tags": ["Kubernetes & Microservices", "Microservices", "Helm", "Video", "Deployment"],
+    "profession": ["DevOps Engineer", "Software Architect"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=3i-vM8j3N5Y"
+  },
+  {
+    "id": "res_k8s_proj_1",
+    "title": "Kubernetes: Simple Deployment YAMLs (Project)",
+    "description": "A template repository containing basic YAML files for deploying a sample web application to a Kubernetes cluster.",
+    "tags": ["Kubernetes & Microservices", "Project", "K8s", "Deployment", "YAML", "Microservices"],
+    "profession": ["DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/kubernetes-yaml"
+  },
+  {
+    "id": "res_serverless_doc_1",
+    "title": "Serverless: AWS Lambda Developer Guide",
+    "description": "The official documentation for AWS Lambda, covering function configuration, event sources, and monitoring.",
+    "tags": ["Serverless Architecture", "AWS Lambda", "Documentation", "Reference", "FaaS", "Serverless"],
+    "profession": ["Cloud Engineer"],
+    "type": "doc",
+    "link": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+  },
+  {
+    "id": "res_serverless_doc_2",
+    "title": "Serverless: Azure Functions Documentation",
+    "description": "Microsoft's guide to building serverless functions using Azure Functions, including triggers and bindings.",
+    "tags": ["Serverless Architecture", "Azure", "Documentation", "Reference", "Serverless", "Functions"],
+    "profession": ["Cloud Engineer"],
+    "type": "doc",
+    "link": "https://docs.microsoft.com/en-us/azure/azure-functions/"
+  },
+  {
+    "id": "res_serverless_vid_1",
+    "title": "Serverless: AWS Lambda Full Tutorial (Video)",
+    "description": "Comprehensive guide on developing, deploying, and invoking serverless functions using AWS Lambda and API Gateway.",
+    "tags": ["Serverless Architecture", "AWS Lambda", "FaaS", "Video", "API Gateway", "Deployment"],
+    "profession": ["Cloud Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=eOBq__h4OJ4"
+  },
+  {
+    "id": "res_serverless_vid_2",
+    "title": "Serverless: Serverless Framework Crash Course (Video)",
+    "description": "Tutorial on using the Serverless Framework to deploy functions across multiple cloud providers (AWS, Azure, GCP).",
+    "tags": ["Serverless Architecture", "Framework", "Video", "Deployment", "Serverless", "Multi-Cloud"],
+    "profession": ["Cloud Engineer", "Backend Developer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=4qV1i8obF6k"
+  },
+  {
+    "id": "res_serverless_proj_1",
+    "title": "Serverless: Simple AWS Lambda Function (Project)",
+    "description": "A template for setting up a basic serverless API that connects a Lambda function to an API Gateway.",
+    "tags": ["Serverless Architecture", "AWS Lambda", "Project", "API", "Serverless", "Deployment"],
+    "profession": ["Cloud Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/aws-lambda-serverless"
+  },
+  {
+    "id": "res_iac_doc_1",
+    "title": "IaC: Terraform Official Documentation",
+    "description": "The primary technical reference for HCL syntax, providers, and state management.",
+    "tags": ["Infrastructure as Code (Terraform)", "Terraform", "Documentation", "Reference", "IaC", "HCL"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://www.terraform.io/docs/index.html"
+  },
+  {
+    "id": "res_iac_doc_2",
+    "title": "IaC: Guide to Terraform State and Backends",
+    "description": "Documentation covering the critical aspects of state management and using remote backends like S3 or Azure Storage.",
+    "tags": ["Infrastructure as Code (Terraform)", "Terraform", "State Management", "Documentation", "IaC", "Backends"],
+    "profession": ["DevOps Engineer"],
+    "type": "doc",
+    "link": "https://www.terraform.io/docs/language/state/backends.html"
+  },
+  {
+    "id": "res_iac_vid_1",
+    "title": "IaC: Terraform in 100 Seconds (Video)",
+    "description": "A very quick conceptual overview of Infrastructure as Code and the role of Terraform.",
+    "tags": ["Infrastructure as Code (Terraform)", "Terraform", "IaC", "Video", "Fundamentals"],
+    "profession": ["DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=tomUWcQ0X8k"
+  },
+  {
+    "id": "res_iac_vid_2",
+    "title": "IaC: Full Terraform Course for AWS/Azure (Video)",
+    "description": "A detailed, project-based course on writing HCL code to provision infrastructure across major cloud providers.",
+    "tags": ["Infrastructure as Code (Terraform)", "Terraform", "AWS", "Video", "IaC", "Deployment"],
+    "profession": ["DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=SLB_c_ayRMo"
+  },
+  {
+    "id": "res_iac_proj_1",
+    "title": "IaC: Terraform Zero to Hero Projects (Project)",
+    "description": "A template repository with HCL code to provision a basic virtual machine and networking stack on AWS.",
+    "tags": ["Infrastructure as Code (Terraform)", "Terraform", "Project", "AWS", "IaC", "Networking"],
+    "profession": ["DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/terraform-aws"
+  },
+  {
+    "id": "res_ml_basics_doc_1",
+    "title": "ML: Scikit-learn Official User Guide",
+    "description": "The definitive documentation for Python's most popular ML library, covering API reference and user guides for all algorithms.",
+    "tags": ["Machine Learning Basics", "Python", "Scikit-learn", "Documentation", "Reference", "ML", "Regression"],
+    "profession": ["Data Scientist"],
+    "type": "doc",
+    "link": "https://scikit-learn.org/stable/user_guide.html"
+  },
+  {
+    "id": "res_ml_basics_doc_2",
+    "title": "ML: Stanford CS229 Machine Learning Cheatsheets",
+    "description": "High-level theoretical cheatsheets covering the mathematical foundations of common ML algorithms.",
+    "tags": ["Machine Learning Basics", "Theory", "Documentation", "Advanced", "ML", "Classification"],
+    "profession": ["Researcher"],
+    "type": "doc",
+    "link": "https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning"
+  },
+  {
+    "id": "res_ml_basics_vid_1",
+    "title": "ML: StatQuest Machine Learning Basics (Video)",
+    "description": "Visually appealing and intuitive explanations of core ML concepts like regression, classification, and model fit.",
+    "tags": ["Machine Learning Basics", "ML", "Data Science", "Fundamentals", "Video", "Regression", "Classification"],
+    "profession": ["Data Scientist"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=ukzFI9rgwfU"
+  },
+  {
+    "id": "res_ml_basics_vid_2",
+    "title": "ML: Full Scikit-learn Tutorial (Video)",
+    "description": "A practical guide to using the Scikit-learn library for all standard ML tasks: data preprocessing, modeling, and evaluation metrics.",
+    "tags": ["Machine Learning Basics", "Python", "Scikit-learn", "Video", "Practical", "Data Preprocessing"],
+    "profession": ["ML Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=pqNCD_5rB6Y"
+  },
+  {
+    "id": "res_ml_basics_proj_1",
+    "title": "ML: Simple Linear Regression Project (Project)",
+    "description": "A beginner project to implement a Linear Regression model in Python from scratch to predict a variable.",
+    "tags": ["Machine Learning Basics", "Python", "Project", "Regression", "ML", "Data Science"],
+    "profession": ["Data Scientist"],
+    "type": "project",
+    "link": "https://github.com/topics/linear-regression-python"
+  },
+  {
+    "id": "res_dl_doc_1",
+    "title": "DL: PyTorch Official Tutorials and Documentation",
+    "description": "The official resource for learning PyTorch, covering tensors, automatic differentiation, and model training workflows.",
+    "tags": ["Deep Learning & Neural Networks", "PyTorch", "Documentation", "Reference", "Neural Networks", "Tensors"],
+    "profession": ["ML Engineer", "Researcher"],
+    "type": "doc",
+    "link": "https://pytorch.org/tutorials/"
+  },
+  {
+    "id": "res_dl_doc_2",
+    "title": "DL: TensorFlow Keras High-Level API Guide",
+    "description": "Documentation for Google's TensorFlow framework, focusing on the Keras API for quickly building and experimenting with neural networks.",
+    "tags": ["Deep Learning & Neural Networks", "TensorFlow", "Keras", "Documentation", "Neural Networks"],
+    "profession": ["ML Engineer", "Developer"],
+    "type": "doc",
+    "link": "https://www.tensorflow.org/guide/keras"
+  },
+  {
+    "id": "res_dl_vid_1",
+    "title": "DL: Deep Learning Explained Simply (Video)",
+    "description": "Conceptual explanation of neural networks, layers, and the backpropagation algorithm without heavy math.",
+    "tags": ["Deep Learning & Neural Networks", "Neural Networks", "Fundamentals", "Video", "Backpropagation"],
+    "profession": ["ML Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=b99UVkWzsgI"
+  },
+  {
+    "id": "res_dl_vid_2",
+    "title": "DL: PyTorch Image Classification Tutorial (Video)",
+    "description": "A practical, code-focused guide on building a Convolutional Neural Network (CNN) for image recognition using PyTorch.",
+    "tags": ["Deep Learning & Neural Networks", "PyTorch", "CNN", "Video", "Practical", "Image Recognition"],
+    "profession": ["ML Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=c36lUUr864M"
+  },
+  {
+    "id": "res_dl_proj_1",
+    "title": "DL: MNIST Image Classification CNN Project (Project)",
+    "description": "A foundational project: building and training a CNN to classify handwritten digits using the famous MNIST dataset.",
+    "tags": ["Deep Learning & Neural Networks", "CNN", "Project", "TensorFlow", "PyTorch", "MNIST"],
+    "profession": ["ML Engineer", "Developer"],
+    "type": "project",
+    "link": "https://github.com/topics/mnist-cnn"
+  },
+  {
+    "id": "res_nlp_doc_1",
+    "title": "NLP: Hugging Face Transformers Documentation",
+    "description": "The definitive resource for using and fine-tuning state-of-the-art transformer models (BERT, GPT, T5).",
+    "tags": ["Natural Language Processing (NLP)", "Transformers", "Documentation", "Hugging Face", "NLP", "LLMs"],
+    "profession": ["ML Engineer", "Data Scientist"],
+    "type": "doc",
+    "link": "https://huggingface.co/docs/transformers/index"
+  },
+  {
+    "id": "res_nlp_doc_2",
+    "title": "NLP: Stanford CS224N Course Notes",
+    "description": "High-level course notes covering the theoretical and practical aspects of modern NLP, including neural networks and language modeling.",
+    "tags": ["Natural Language Processing (NLP)", "Theory", "Documentation", "Stanford", "Neural Networks", "NLP"],
+    "profession": ["ML Engineer", "Researcher"],
+    "type": "doc",
+    "link": "http://web.stanford.edu/class/cs224n/syllabus.html"
+  },
+  {
+    "id": "res_nlp_vid_1",
+    "title": "NLP: Natural Language Processing Full Course (Video)",
+    "description": "A complete guide covering text preprocessing, embeddings, recurrent models, and basic LLM concepts.",
+    "tags": ["Natural Language Processing (NLP)", "NLP", "AI", "Text Processing", "Video", "Embeddings"],
+    "profession": ["ML Engineer", "Data Scientist"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=fOvTtap9w1Y"
+  },
+  {
+    "id": "res_nlp_vid_2",
+    "title": "NLP: Transformer Models Explained (Video)",
+    "description": "Focused tutorial on the Transformer architecture, attention mechanisms, and their role in modern NLP.",
+    "tags": ["Natural Language Processing (NLP)", "Transformers", "LLMs", "Video", "Advanced", "Attention"],
+    "profession": ["ML Engineer", "Researcher"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=XSSTuhyAmnI"
+  },
+  {
+    "id": "res_nlp_proj_1",
+    "title": "NLP: Sentiment Analysis Project with Python (Project)",
+    "description": "A hands-on project to build a model that classifies text as positive, negative, or neutral using traditional and neural methods.",
+    "tags": ["Natural Language Processing (NLP)", "Project", "Sentiment Analysis", "Python", "NLP", "Text Processing"],
+    "profession": ["ML Engineer", "Data Scientist"],
+    "type": "project",
+    "link": "https://github.com/topics/sentiment-analysis-nlp"
+  },
+  {
+    "id": "res_ds_py_doc_1",
+    "title": "DS: Pandas Official Documentation (10 Minutes to Pandas)",
+    "description": "The essential guide to getting started with data manipulation, indexing, and time series in Pandas.",
+    "tags": ["Data Science with Python/R", "Pandas", "Documentation", "Reference", "Data Analysis", "Python"],
+    "profession": ["Data Scientist", "Data Analyst"],
+    "type": "doc",
+    "link": "https://pandas.pydata.org/docs/user_guide/10min.html"
+  },
+  {
+    "id": "res_ds_py_doc_2",
+    "title": "DS: R Studio Documentation and Guides",
+    "description": "Official guides for the R language, focusing on statistical computing and data analysis workflows.",
+    "tags": ["Data Science with Python/R", "R", "Documentation", "Statistics", "Data Analysis"],
+    "profession": ["Data Scientist"],
+    "type": "doc",
+    "link": "https://rstudio.com/resources/cheatsheets/"
+  },
+  {
+    "id": "res_ds_py_vid_1",
+    "title": "DS: Pandas and NumPy Data Analysis Tutorial (Video)",
+    "description": "Practical guide to data cleaning, manipulation, and analysis using the Pandas and NumPy libraries in Python.",
+    "tags": ["Data Science with Python/R", "Data Analysis", "Python", "Pandas", "Video", "NumPy"],
+    "profession": ["Data Scientist", "Data Analyst"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=tRKeL1HEDnY"
+  },
+  {
+    "id": "res_ds_py_vid_2",
+    "title": "DS: Data Visualization with Matplotlib and Seaborn (Video)",
+    "description": "Focused tutorial on creating static, interactive, and advanced statistical plots for exploratory data analysis (EDA).",
+    "tags": ["Data Science with Python/R", "Visualization", "Python", "Video", "Matplotlib", "Seaborn", "EDA"],
+    "profession": ["Data Analyst"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=6guNd_jYkr4"
+  },
+  {
+    "id": "res_ds_py_proj_1",
+    "title": "DS: Exploratory Data Analysis (EDA) Template (Project)",
+    "description": "A Jupyter notebook template demonstrating a structured approach to EDA on a clean or raw dataset.",
+    "tags": ["Data Science with Python/R", "EDA", "Project", "Jupyter", "Data Analysis", "Python"],
+    "profession": ["Data Analyst"],
+    "type": "project",
+    "link": "https://github.com/topics/eda-template"
+  },
+  {
+    "id": "res_mlops_doc_1",
+    "title": "MLOps: MLOps Zoomcamp Course",
+    "description": "Free MLOps course materials covering deployment, monitoring, and maintenance of models.",
+    "tags": ["AI Model Deployment & MLOps", "MLOps", "Documentation", "Deployment", "Model Monitoring"],
+    "profession": ["ML Engineer"],
+    "type": "doc",
+    "link": "https://github.com/DataTalksClub/mlops-zoomcamp"
+  },
+  {
+    "id": "res_mlops_doc_2",
+    "title": "MLOps: TensorFlow Serving Documentation",
+    "description": "Technical documentation on deploying TensorFlow models into production using TensorFlow Serving and Kubernetes.",
+    "tags": ["AI Model Deployment & MLOps", "TensorFlow", "Deployment", "Documentation", "MLOps", "Kubernetes"],
+    "profession": ["ML Engineer"],
+    "type": "doc",
+    "link": "https://www.tensorflow.org/tfx/serving/serving_basic"
+  },
+  {
+    "id": "res_mlops_vid_1",
+    "title": "MLOps: CI/CD for Machine Learning (Video)",
+    "description": "Conceptual and practical guide to setting up CI/CD pipelines specifically for machine learning models (Model deployment, testing).",
+    "tags": ["AI Model Deployment & MLOps", "MLOps", "CI/CD", "Video", "DevOps", "Deployment"],
+    "profession": ["ML Engineer", "DevOps Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=9gBC9R-msAk"
+  },
+  {
+    "id": "res_mlops_vid_2",
+    "title": "MLOps: Model Monitoring and Drift Detection (Video)",
+    "description": "Tutorial on monitoring models in production for data drift, concept drift, and performance degradation.",
+    "tags": ["AI Model Deployment & MLOps", "Monitoring", "Advanced", "Video", "Data Drift", "MLOps"],
+    "profession": ["ML Engineer"],
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=0d5eG9g97jY"
+  },
+  {
+    "id": "res_mlops_proj_1",
+    "title": "MLOps: ML CI/CD Pipeline Starter (Project)",
+    "description": "A template repository demonstrating a basic CI/CD pipeline setup for a machine learning model using GitHub Actions.",
+    "tags": ["AI Model Deployment & MLOps", "Project", "CI/CD", "Deployment", "MLOps", "GitHub Actions"],
+    "profession": ["ML Engineer", "DevOps Engineer"],
+    "type": "project",
+    "link": "https://github.com/topics/mlops-cicd"
   }
 ]
