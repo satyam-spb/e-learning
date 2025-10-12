@@ -89,7 +89,9 @@ const Quiz: React.FC = () => {
       setShowConfig(false);
       toast.success("Quiz loaded successfully!");
     } catch (error) {
-      toast.error("Failed to load quiz. Please try again.");
+      toast.error(
+        "We're still building this quiz. You might discover more by tweaking your topic or profession slightly."
+      );
       console.error("Failed to load quiz:", error);
     } finally {
       setLoading(false);

@@ -166,32 +166,30 @@ def ensure_course_embeddings_cached(courses: List[dict]):
     logger.info("[startup] Course embeddings cached successfully.")
 
 try:
-    # Load courses.json from the server folder
-    with open(os.path.join(os.path.dirname(__file__), "courses.json"), "r") as f:
+    # Load courses.json from the server folder (path relative to this file)
+    courses_path = os.path.join(os.path.dirname(__file__), "courses.json")
+    with open(courses_path, "r") as f:
         COURSES = json.load(f)
-except FileNotFoundError:
-    logger.error("courses.json file not found in server folder.")
-    COURSES = []
-except json.JSONDecodeError:
-    logger.error("Invalid JSON format in courses.json.")
+except Exception as e:
+    # Log a friendly warning; downstream code expects COURSES to be a list.
+    logger.warning(f"[startup] Warning: could not load courses.json: {e}")
     COURSES = []
 
-# --- Startup: cache embeddings ---
-@app.on_event("startup")
-async def startup_event():
-    loop = asyncio.get_running_loop()
-    await loop.run_in_executor(None, ensure_course_embeddings_cached, COURSES)
 
 def infer_course_difficulty(course: dict) -> str:
-    """Infers a course difficulty level based on its title and tags."""
+    """Simple heuristic to infer course difficulty from title or tags.
+    Returns one of: 'easy', 'medium', 'hard'.
+    """
     title = course.get("title", "").lower()
     tags = [t.lower() for t in course.get("tags", [])]
-    
-    if any(keyword in title for keyword in ["advanced", "expert", "deep learning", "machine learning algorithms", "reinforcement"]):
+
+    hard_keywords = ["advanced", "expert", "deep learning", "machine learning algorithms", "reinforcement"]
+    easy_keywords = ["basics", "fundamentals", "intro to", "introduction"]
+
+    if any(keyword in title for keyword in hard_keywords) or any(k in " ".join(tags) for k in hard_keywords):
         return "hard"
-    if any(keyword in title for keyword in ["basics", "fundamentals", "intro to", "introduction"]):
+    if any(keyword in title for keyword in easy_keywords) or any(k in " ".join(tags) for k in easy_keywords):
         return "easy"
-    
     return "medium"
 
 @app.get("/quiz", response_model=List[QuizQuestion])
@@ -227,6 +225,18 @@ async def get_quiz_topics():
     except Exception as e:
         logger.error(f"Error fetching quiz topics: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error fetching topics: {str(e)}")
+
+
+@app.get("/courses")
+async def get_courses():
+    """Return the list of courses loaded from courses.json.
+    This endpoint is used by the frontend to populate profession and topic selects.
+    """
+    try:
+        return COURSES
+    except Exception as e:
+        logger.error(f"Error returning courses: {e}")
+        raise HTTPException(status_code=500, detail="Failed to load courses")
 
 @app.post("/quiz/results")
 async def save_quiz_results(result: UserQuizResult):
