@@ -7,9 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from pymongo import MongoClient
+from datetime import datetime
+from pymongo import MongoClient, ASCENDING
 import numpy as np
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
+# sentence_transformers is imported lazily inside lazy_load_embedding_model()
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
@@ -23,16 +25,39 @@ import asyncio
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-load_dotenv()
+# Environment loading strategy:
+# - If ENV_FILE_PATH is set and the file exists, load it (useful for hosts that drop a file into the container).
+# - Else if ENV != 'production', load local .env for developer convenience.
+# - Otherwise (production, and no ENV_FILE_PATH), do not load .env and rely on true environment variables.
+env_file_path = os.getenv("ENV_FILE_PATH")
+if env_file_path:
+    if os.path.exists(env_file_path):
+        try:
+            load_dotenv(env_file_path)
+            logger.info(f"Loaded environment from ENV_FILE_PATH={env_file_path}")
+        except Exception:
+            logger.warning(f"Failed to load env file at ENV_FILE_PATH={env_file_path}; proceeding with environment variables.")
+    else:
+        logger.warning(f"ENV_FILE_PATH is set to '{env_file_path}' but file does not exist. Not loading it.")
+else:
+    if os.getenv("ENV", "").lower() != "production":
+        try:
+            load_dotenv()
+            logger.info("Loaded local .env for development (ENV != production).")
+        except Exception:
+            logger.debug("Could not load local .env — proceeding with existing environment variables.")
 
 # --- API Key Check and Database Setup ---
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY is not set in the .env file.")
+    # LLM key is required for chat functionality; fail early so deployments supply it.
+    raise ValueError("GROQ_API_KEY is not set in environment variables. In production set GROQ_API_KEY in the host environment (do not rely on a .env file).")
 
 ABUSEIPDB_API_KEY = os.getenv("ABUSEIPDB_API_KEY")
 if not ABUSEIPDB_API_KEY:
-    raise ValueError("ABUSEIPDB_API_KEY is not set in the .env file.")
+    # AbuseIPDB is optional. If not provided, IP threat checks will be skipped.
+    logger.warning("ABUSEIPDB_API_KEY not set; skipping AbuseIPDB checks (recommended for production).")
+    ABUSEIPDB_API_KEY = None
 
 MONGO_URI = os.getenv("MONGO_URI") or "mongodb://localhost:27017/"
 mongo_client = MongoClient(MONGO_URI)
@@ -40,6 +65,7 @@ db = mongo_client["elearning-ai"]
 quiz_collection = db["quizzes"]
 course_embeddings_collection = db["courseEmbeddings"]
 user_results_collection = db["user_quiz_results"]
+conversations_collection = db["conversations"]
 
 # Add connection check logic
 try:
@@ -48,14 +74,42 @@ try:
 except Exception as e:
     logger.error(f"Failed to connect to MongoDB: {e}")
 
-# Load embedding model once for RAG and recommendations
-embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+# Embeddings source control: prefer DB by default for deployed environments
+# EMBEDDINGS_SOURCE can be: local_json | compute | db
+EMBEDDINGS_SOURCE = os.getenv("EMBEDDINGS_SOURCE", "db")
+embedding_model = None
+
+def lazy_load_embedding_model():
+    global embedding_model
+    if embedding_model is None:
+        from sentence_transformers import SentenceTransformer
+        embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    return embedding_model
 
 # Setup Groq client
 llm = ChatGroq(model="llama-3.1-8b-instant", groq_api_key=GROQ_API_KEY)
 
 # --- FastAPI App ---
 app = FastAPI()
+
+# Developer-enforced system instruction: assistant must only answer tech/CS questions
+SYSTEM_INSTRUCTION = (
+    "You are an AI assistant whose scope is technology and computer science only. "
+    "Always follow this rule. If the user asks about topics outside technology or computer science, "
+    "politely decline and say the question is out of scope. Provide a brief suggestion for where the user "
+    "might find help (for example, suggest a general knowledge source) but do NOT answer non-technical questions."
+)
+
+
+@app.on_event("startup")
+async def ensure_ttl_index():
+    """Ensure a TTL index exists on conversations.timestamp (7 days). This is idempotent."""
+    try:
+        expire_seconds = 7 * 24 * 60 * 60
+        conversations_collection.create_index([("timestamp", ASCENDING)], expireAfterSeconds=expire_seconds)
+        logger.info(f"Ensured TTL index on conversations.timestamp (expireAfterSeconds={expire_seconds})")
+    except Exception as e:
+        logger.warning(f"Could not create TTL index on conversations collection: {e}")
 
 # Add the cybersecurity middleware
 ABUSEIPDB_URL = "https://api.abuseipdb.com/api/v2/check"
@@ -64,6 +118,10 @@ async def check_threat_ip_middleware(request: Request, call_next: Callable):
     client_ip = get_remote_address(request)
     
     if client_ip in ["127.0.0.1", "::1"]:
+        return await call_next(request)
+
+    # If AbuseIPDB is not configured, skip this check
+    if not ABUSEIPDB_API_KEY:
         return await call_next(request)
 
     try:
@@ -83,10 +141,16 @@ async def check_threat_ip_middleware(request: Request, call_next: Callable):
         logger.warning(f"Failed to check IP with AbuseIPDB: {e}")
         return await call_next(request)
 
-# CORS configuration
+# CORS configuration - configurable via ALLOWED_ORIGINS (comma-separated)
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+if allowed_origins_env == "*":
+    allowed_origins = ["*"]
+else:
+    allowed_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,6 +175,7 @@ class UserQuizResult(BaseModel):
     user_id: str
     topic: str
     score: float
+    profession: Optional[str] = None
 
 class QuizQuestion(BaseModel):
     id: str
@@ -131,9 +196,14 @@ def build_course_text(course: dict) -> str:
 def cache_course_embeddings(courses: List[dict]):
     """Helper for caching embeddings (synchronous)."""
     logger.info(f"Caching embeddings for {len(courses)} courses.")
+    model = lazy_load_embedding_model()
     for course in courses:
         course_text = build_course_text(course)
-        embedding = embedding_model.encode([course_text], show_progress_bar=False)[0]
+        try:
+            embedding = model.encode([course_text], show_progress_bar=False)[0]
+        except Exception as e:
+            logger.error(f"Failed to encode course '{course.get('title', '')}': {e}")
+            continue
         course_id = course.get("id")
         if not course_id:
             logger.warning(f"Skipping course with missing ID: {course.get('title', 'Unknown')}")
@@ -161,9 +231,13 @@ def ensure_course_embeddings_cached(courses: List[dict]):
         logger.info(f"[startup] Skipping embedding generation – {existing_count} embeddings already cached.")
         return
 
-    logger.info("[startup] Computing course embeddings...")
-    cache_course_embeddings(courses)
-    logger.info("[startup] Course embeddings cached successfully.")
+    # Only compute embeddings at startup if explicitly allowed
+    if EMBEDDINGS_SOURCE == "compute":
+        logger.info("[startup] Computing course embeddings (EMBEDDINGS_SOURCE=compute)...")
+        cache_course_embeddings(courses)
+        logger.info("[startup] Course embeddings cached successfully.")
+    else:
+        logger.info("[startup] EMBEDDINGS_SOURCE != 'compute'. Skipping compute. Expecting local JSON or DB entries.")
 
 try:
     # Load courses.json from the server folder (path relative to this file)
@@ -174,6 +248,26 @@ except Exception as e:
     # Log a friendly warning; downstream code expects COURSES to be a list.
     logger.warning(f"[startup] Warning: could not load courses.json: {e}")
     COURSES = []
+
+# --- Optionally load precomputed embeddings from server/data/course_embeddings.json when requested
+EMB_JSON_PATH = os.path.join(os.path.dirname(__file__), "data", "course_embeddings.json")
+EMB_MAP: Dict[str, Any] = {}
+if EMBEDDINGS_SOURCE == "local_json":
+    if os.path.exists(EMB_JSON_PATH):
+        try:
+            with open(EMB_JSON_PATH, "r") as f:
+                emb_docs = json.load(f)
+            for doc in emb_docs:
+                cid = doc.get("courseId")
+                if cid and "embedding" in doc:
+                    EMB_MAP[cid] = np.array(doc["embedding"])
+            logger.info(f"Loaded {len(EMB_MAP)} embeddings from {EMB_JSON_PATH}")
+        except Exception as e:
+            logger.error(f"Failed to load embeddings from JSON: {e}")
+    else:
+        logger.info("No local embeddings JSON found; EMB_MAP is empty.")
+else:
+    logger.info(f"EMBEDDINGS_SOURCE={EMBEDDINGS_SOURCE}; preferring DB embeddings if available.")
 
 
 def infer_course_difficulty(course: dict) -> str:
@@ -191,6 +285,79 @@ def infer_course_difficulty(course: dict) -> str:
     if any(keyword in title for keyword in easy_keywords) or any(k in " ".join(tags) for k in easy_keywords):
         return "easy"
     return "medium"
+
+
+# Conversation helpers
+def store_conversation_message(conversation_id: str, user_id: Optional[str], role: str, content: str):
+    doc = {
+        "conversation_id": conversation_id,
+        "user_id": user_id,
+        "role": role,
+        "content": content,
+        "timestamp": datetime.utcnow()
+    }
+    try:
+        conversations_collection.insert_one(doc)
+    except Exception as e:
+        logger.error(f"Failed to store conversation message: {e}")
+
+
+def get_conversation_messages(conversation_id: str, limit: int = 100) -> List[dict]:
+    try:
+        msgs = list(conversations_collection.find({"conversation_id": conversation_id}).sort("timestamp", 1).limit(limit))
+        return msgs
+    except Exception as e:
+        logger.error(f"Failed to fetch conversation messages: {e}")
+        return []
+
+
+async def summarize_and_compact_conversation(conversation_id: str, keep_last: int = 20) -> Optional[str]:
+    """Summarize the older part of the conversation into a short summary, insert it as a system message,
+    and remove the older messages except the last `keep_last` messages. Returns the summary string or None."""
+    try:
+        all_msgs = list(conversations_collection.find({"conversation_id": conversation_id}).sort("timestamp", 1))
+        if len(all_msgs) <= keep_last + 5:
+            return None
+
+        # Messages to summarize: everything except the last `keep_last`
+        to_summarize = all_msgs[:-keep_last]
+        formatted = []
+        for m in to_summarize:
+            role = m.get("role", "unknown")
+            content = m.get("content", "")
+            formatted.append(f"{role.upper()}: {content}")
+        messages_text = "\n".join(formatted)
+
+        summarize_prompt = PromptTemplate(
+            input_variables=["messages"],
+            template=(
+                f"{SYSTEM_INSTRUCTION}\n\n"
+                "Summarize the following conversation between the user and assistant into a short 2-3 sentence summary. "
+                "Preserve important facts, user goals, and any decisions. Keep it concise.\n\nConversation:\n{messages}\n\nSummary:"
+            )
+        )
+        chain = summarize_prompt | llm | StrOutputParser()
+        summary = await chain.ainvoke({"messages": messages_text})
+        summary_text = str(summary).strip()
+
+        # Insert the summary as a system message
+        store_conversation_message(conversation_id, None, "system", f"Conversation summary: {summary_text}")
+
+        # Remove the older messages that were summarized to avoid growing DB too large
+        # Keep only the last `keep_last` messages plus the newly inserted summary
+        try:
+            # find timestamps to keep
+            last_msgs = all_msgs[-keep_last:]
+            last_timestamps = [m["timestamp"] for m in last_msgs]
+            oldest_to_keep = min(last_timestamps) if last_timestamps else datetime.utcnow()
+            conversations_collection.delete_many({"conversation_id": conversation_id, "timestamp": {"$lt": oldest_to_keep}})
+        except Exception as e:
+            logger.warning(f"Failed to prune old messages after summarization: {e}")
+
+        return summary_text
+    except Exception as e:
+        logger.error(f"Error during conversation summarization: {e}")
+        return None
 
 @app.get("/quiz", response_model=List[QuizQuestion])
 async def get_quiz(
@@ -241,8 +408,9 @@ async def get_courses():
 @app.post("/quiz/results")
 async def save_quiz_results(result: UserQuizResult):
     try:
+        # Store user's quiz result along with optional profession
         user_results_collection.update_one(
-            {"user_id": result.user_id, "topic": result.topic},
+            {"user_id": result.user_id},
             {"$set": result.dict()},
             upsert=True
         )
@@ -319,15 +487,28 @@ async def recommend(request: RecommendationRequest):
         prof_part = f"Profession: {request.profession}" if request.profession else "No profession"
         user_text = f"{prof_part}. {pref_part}. {quiz_part}."
         logger.info(f"User text for embedding: {user_text}")
-        user_embedding = embedding_model.encode([user_text], normalize_embeddings=True)[0]
+        # Create user embedding using lazy model loading if necessary
+        if EMBEDDINGS_SOURCE == "local_json":
+            # still need an embedding model for user text; lazy-load it
+            model = lazy_load_embedding_model()
+            user_embedding = model.encode([user_text], normalize_embeddings=True)[0]
+        else:
+            model = lazy_load_embedding_model()
+            user_embedding = model.encode([user_text], normalize_embeddings=True)[0]
 
         # --- Retrieve course embeddings ---
-        course_ids = [c["id"] for c in filtered_courses if c.get("id")]
-        course_embeddings_docs = list(course_embeddings_collection.find({"courseId": {"$in": course_ids}}))
-        logger.info(f"Retrieved {len(course_embeddings_docs)} course embeddings from DB.")
+        # Prepare embedding map: prefer local JSON map (EMB_MAP) else fall back to DB
+        emb_map = {}
+        if EMB_MAP:
+            emb_map = EMB_MAP
+            logger.info(f"Using {len(emb_map)} embeddings from local JSON map.")
+        else:
+            course_ids = [c["id"] for c in filtered_courses if c.get("id")]
+            course_embeddings_docs = list(course_embeddings_collection.find({"courseId": {"$in": course_ids}}))
+            logger.info(f"Retrieved {len(course_embeddings_docs)} course embeddings from DB.")
+            emb_map = {doc["courseId"]: np.array(doc["embedding"]) for doc in course_embeddings_docs if "embedding" in doc}
 
-        emb_map = {doc["courseId"]: np.array(doc["embedding"]) for doc in course_embeddings_docs if "embedding" in doc}
-        aligned_filtered_courses = [c for c in filtered_courses if c["id"] in emb_map]
+        aligned_filtered_courses = [c for c in filtered_courses if c.get("id") in emb_map]
         logger.info(f"Aligned courses with embeddings: {len(aligned_filtered_courses)}")
 
         if not aligned_filtered_courses:
@@ -392,71 +573,160 @@ async def recommend(request: RecommendationRequest):
         logger.error(f"Recommendation error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Recommendation error: {str(e)}")
 
+@app.get("/status")
+async def status():
+    """Return a simple status with counts and embeddings source."""
+    def safe_count(collection):
+        try:
+            return collection.count_documents({})
+        except Exception:
+            return None
+
+    quizzes_count = safe_count(quiz_collection)
+    results_count = safe_count(user_results_collection)
+
+    # If EMB_MAP is populated (local JSON), use its length for embeddings_count
+    embeddings_count = len(EMB_MAP) if EMB_MAP else safe_count(course_embeddings_collection)
+
+    return {
+        "status": "ok",
+        "quizzes_count": quizzes_count,
+        "embeddings_count": embeddings_count,
+        "user_quiz_results_count": results_count,
+        "embeddings_source": EMBEDDINGS_SOURCE,
+    }
+
+
 @app.post("/chat/")
 async def chat(input: ChatInput):
     try:
-        logger.info(f"Processing chat request: message='{input.message}', user_id='{input.user_id}', conversation_id='{input.conversation_id}'")
+        # Persist the incoming user message
+        store_conversation_message(input.conversation_id, input.user_id, "user", input.message)
 
-        # Improved classification to recognize programming-related terms
-        classification_prompt = PromptTemplate(
-            input_variables=["message"],
-            template="Classify the following user message as 'coding' or 'other'. Consider terms like 'Java', 'object', 'class', 'programming', 'code', or specific programming concepts as 'coding'. Message: {message} Classification:"
-        )
-        classification_chain = classification_prompt | llm | StrOutputParser()
-        classification_result = await classification_chain.ainvoke({"message": input.message})
-        logger.info(f"Message classification: {classification_result}")
-
-        if "other" in classification_result.strip().lower():
-            logger.info("Message classified as 'other', returning generic response")
-            return {
-                "response": "I specialize in computer science and engineering topics like Java, AI, and cybersecurity. For non-technical questions, please consult another resource.",
-                "conversation_id": input.conversation_id
-            }
-
-        # Fetch user quiz results for context
+        # Optionally fetch user's saved quiz results for context and include as system message on first interaction
         user_quiz_results = None
         if input.user_id:
             user_quiz_results = user_results_collection.find_one({"user_id": input.user_id})
             logger.info(f"User quiz results: {user_quiz_results}")
+            # If this is the first message (no prior messages), insert system note about quiz/profession
+            existing = conversations_collection.count_documents({"conversation_id": input.conversation_id})
+            if existing <= 1 and user_quiz_results:
+                prof = user_quiz_results.get("profession") or "Unknown"
+                score = user_quiz_results.get("score")
+                topic = user_quiz_results.get("topic")
+                system_text = f"User quiz result: topic={topic}, score={score}%. Profession: {prof}."
+                store_conversation_message(input.conversation_id, input.user_id, "system", system_text)
 
-        # Retrieve relevant quiz questions, prioritizing topic matches
+        # Fetch conversation history
+        history = get_conversation_messages(input.conversation_id, limit=500)
+
+        # Summarize older history if it's too long
+        if len(history) > 60:
+            summary = await summarize_and_compact_conversation(input.conversation_id, keep_last=25)
+            if summary:
+                logger.info(f"Summarized conversation: {summary}")
+            # Reload history after summarization
+            history = get_conversation_messages(input.conversation_id, limit=500)
+
+        # Build context from last messages (skip system summaries if present?)
+        context_parts = []
+        # include up to last 25 messages
+        recent = history[-25:]
+        for m in recent:
+            role = m.get("role")
+            content = m.get("content")
+            if role and content:
+                context_parts.append(f"{role}: {content}")
+        context = "\n".join(context_parts)
+
+        # Also include some relevant quiz questions for topical context (best-effort)
         query_terms = input.message.lower().split()
-        topic_regex = "|".join([f".*{term}.*" for term in query_terms if term in ["java", "object", "class", "programming"]])
-        retrieved_questions = list(quiz_collection.find({
-            "$or": [
-                {"question": {"$regex": input.message, "$options": "i"}},
-                {"topic": {"$regex": topic_regex, "$options": "i"}}
-            ]
-        }).limit(5))
-        logger.info(f"Retrieved {len(retrieved_questions)} quiz questions for context")
+        topic_terms = [term for term in query_terms if term in ["java", "object", "class", "programming"]]
+        topic_regex = "|".join([f".*{term}.*" for term in topic_terms]) if topic_terms else ""
+        if topic_regex:
+            retrieved_questions = list(quiz_collection.find({
+                "$or": [
+                    {"question": {"$regex": input.message, "$options": "i"}},
+                    {"topic": {"$regex": topic_regex, "$options": "i"}}
+                ]
+            }).limit(5))
+        else:
+            retrieved_questions = list(quiz_collection.find({"question": {"$regex": input.message, "$options": "i"}}).limit(5))
 
-        # Build context
-        context = ""
-        if user_quiz_results:
-            context += f"User has a past quiz score of {user_quiz_results.get('score', 'N/A')}% on topic '{user_quiz_results.get('topic', 'N/A')}'.\n\n"
         if retrieved_questions:
-            context += "Relevant quiz questions for context:\n"
+            context += "\nRelevant quiz questions for context:\n"
             for q in retrieved_questions:
                 correct_option_index = q.get('correctAnswer')
                 correct_answer = q['options'][correct_option_index] if 'options' in q and correct_option_index is not None else "N/A"
                 context += f"- Question: {q.get('question', 'N/A')}\n  Correct Answer: {correct_answer}\n"
-        else:
-            context += "No specific quiz questions found for this topic.\n"
 
-        # Enhanced prompt for technical questions
+        # Build the prompt using conversation context
         prompt_template = PromptTemplate(
             input_variables=["context", "question"],
-            template="You are a knowledgeable AI assistant specializing in computer science. Provide a clear, accurate, and concise answer to the user's question, using the provided context if relevant. For Java-related questions, explain concepts in the context of Java programming, including examples where appropriate. Context: {context}\nUser's Question: {question}\nAnswer:"
+            template=(
+                f"{SYSTEM_INSTRUCTION}\n\n"
+                "You are a helpful AI assistant. Use the conversation context and relevant quiz info to answer the user's question concisely. "
+                "Context: {context}\nUser's Question: {question}\nAnswer:"
+            )
         )
+
         chain = prompt_template | llm | StrOutputParser()
         response = await chain.ainvoke({"context": context, "question": input.message})
-        logger.info(f"Chat response generated: {response[:100]}...")
+        logger.info(f"Chat response generated: {str(response)[:100]}...")
+
+        # Persist assistant response
+        store_conversation_message(input.conversation_id, input.user_id, "assistant", str(response))
 
         return {"response": response, "conversation_id": input.conversation_id}
 
     except Exception as e:
         logger.error(f"Chat error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to process chat request: {str(e)}")
+
+
+@app.get("/chat/history")
+async def chat_history(conversation_id: str = Query(...)):
+    try:
+        msgs = get_conversation_messages(conversation_id, limit=1000)
+        # Convert ObjectId and datetime to serializable forms
+        out = []
+        for m in msgs:
+            ts = m.get("timestamp")
+            ts_iso = ts.isoformat() if ts is not None else None
+            out.append({
+                "role": m.get("role"),
+                "content": m.get("content"),
+                "timestamp": ts_iso,
+            })
+        return {"messages": out}
+    except Exception as e:
+        logger.error(f"Failed to get chat history: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get chat history")
+
+
+@app.delete("/chat/{conversation_id}")
+async def delete_chat(conversation_id: str):
+    try:
+        result = conversations_collection.delete_many({"conversation_id": conversation_id})
+        logger.info(f"Deleted {result.deleted_count} messages for conversation {conversation_id}")
+        return {"deleted_count": int(result.deleted_count)}
+    except Exception as e:
+        logger.error(f"Failed to delete chat {conversation_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete chat history")
+
+
+@app.post("/chat/cleanup")
+async def chat_cleanup(payload: dict):
+    conversation_id = payload.get("conversation_id")
+    if not conversation_id:
+        raise HTTPException(status_code=400, detail="conversation_id is required")
+    try:
+        result = conversations_collection.delete_many({"conversation_id": conversation_id})
+        logger.info(f"Cleanup deleted {result.deleted_count} messages for conversation {conversation_id}")
+        return {"deleted_count": int(result.deleted_count)}
+    except Exception as e:
+        logger.error(f"Failed to cleanup chat {conversation_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to cleanup chat history")
 
 # Serve static files from client-test folder
 app.mount("/static", StaticFiles(directory="../client-test"), name="static")

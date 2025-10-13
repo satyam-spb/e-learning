@@ -3,10 +3,18 @@ import json
 import pymongo
 from dotenv import load_dotenv
 
-load_dotenv()
+env_file_path = os.getenv("ENV_FILE_PATH")
+if env_file_path and os.path.exists(env_file_path):
+    load_dotenv(env_file_path)
+elif os.getenv("ENV", "").lower() != "production":
+    try:
+        load_dotenv()
+    except Exception:
+        pass
 
-# MONGO_URI = os.getenv("MONGO_URI") or "mongodb://localhost:27017/"
 MONGO_URI = os.getenv("MONGO_URI")
+if not MONGO_URI:
+    raise SystemExit("MONGO_URI not set. Export it in your shell or provide an ENV_FILE_PATH pointing to a file that contains it for production.")
 DB_NAME = "elearning-ai"
 QUIZ_COLLECTION = "quizzes"
 
