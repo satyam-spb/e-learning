@@ -153,12 +153,29 @@ async def check_threat_ip_middleware(request: Request, call_next: Callable):
         logger.warning(f"Failed to check IP with AbuseIPDB: {e}")
         return await call_next(request)
 
-# CORS configuration - configurable via ALLOWED_ORIGINS (comma-separated)
-allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
-if allowed_origins_env == "*":
-    allowed_origins = ["*"]
-else:
+# CORS configuration (no hard-coded URLs in code)
+# Behavior:
+#  - If ALLOWED_ORIGINS is set (comma-separated), it will be used verbatim.
+#  - Otherwise, the app will look for FRONTEND_URL and UPTIME_ROBOT_URL environment variables and use them.
+#  - If none of these are provided, the server will log a warning and fall back to allowing all origins ("*") to avoid accidental blocking in development.
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+front_end_url = os.getenv("FRONTEND_URL")
+uptime_robot_url = os.getenv("UPTIME_ROBOT_URL")
+
+if allowed_origins_env:
     allowed_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+else:
+    allowed_origins = []
+    if front_end_url:
+        allowed_origins.append(front_end_url.rstrip("/"))
+    if uptime_robot_url:
+        allowed_origins.append(uptime_robot_url.rstrip("/"))
+
+if not allowed_origins:
+    logger.warning("No CORS origins configured (ALLOWED_ORIGINS, FRONTEND_URL, UPTIME_ROBOT_URL are all empty). Falling back to allow_origins=['*']. Consider setting FRONTEND_URL in your environment or .env.")
+    allowed_origins = ["*"]
+
+logger.info(f"Configured CORS allow_origins={allowed_origins}")
 
 app.add_middleware(
     CORSMiddleware,

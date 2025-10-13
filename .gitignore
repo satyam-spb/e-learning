@@ -13,3 +13,14 @@ client/.blot
 
 # Ignore virtual environment inside server folder
 server/venv/
+
+# repo-level .gitignore
+client/node_modules
+client/dist
+server/__pycache__
+server/.env
+client/.env
+.DS_Store
+*.pyc
+venv/
+

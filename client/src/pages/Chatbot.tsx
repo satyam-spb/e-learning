@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Sparkles, User, Bot } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-import { apiHelpers } from "../config/api";
+import { apiHelpers, BASE_URL } from "../config/api";
 import { toast } from "react-toastify";
 import StarBackground from "../components/UI/StarBackground";
 
@@ -82,8 +82,7 @@ const Chatbot: React.FC = () => {
         localStorage.removeItem("conversationId");
 
         // Delete server-side conversation via a keepalive POST to /chat/cleanup
-        const base = import.meta.env.VITE_API_BASE || "http://localhost:8000";
-        const url = `${base}/chat/cleanup`;
+        const url = `${BASE_URL}/chat/cleanup`;
         const body = JSON.stringify({ conversation_id: conversationId });
 
         // preferred modern API: fetch with keepalive
