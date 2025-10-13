@@ -1,7 +1,13 @@
 import os
 import json
 from typing import List, Dict, Optional, Callable, Any
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except Exception:
+    # If python-dotenv is not installed, provide a no-op loader so the app can still run.
+    def load_dotenv(path: str = None):
+        # no-op fallback when python-dotenv isn't available
+        return False
 from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -13,6 +19,7 @@ import numpy as np
 # from sentence_transformers import SentenceTransformer
 # sentence_transformers is imported lazily inside lazy_load_embedding_model()
 from sklearn.metrics.pairwise import cosine_similarity
+
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -50,8 +57,7 @@ else:
 # --- API Key Check and Database Setup ---
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
-    # LLM key is required for chat functionality; fail early so deployments supply it.
-    raise ValueError("GROQ_API_KEY is not set in environment variables. In production set GROQ_API_KEY in the host environment (do not rely on a .env file).")
+    raise ValueError("GROQ_API_KEY is not set in environment variables. Set GROQ_API_KEY to enable chat/LLM features.")
 
 ABUSEIPDB_API_KEY = os.getenv("ABUSEIPDB_API_KEY")
 if not ABUSEIPDB_API_KEY:
@@ -86,8 +92,14 @@ def lazy_load_embedding_model():
         embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
     return embedding_model
 
-# Setup Groq client
-llm = ChatGroq(model="llama-3.1-8b-instant", groq_api_key=GROQ_API_KEY)
+# Setup Groq client if LLM is enabled and API key exists
+llm = None
+try:
+    llm = ChatGroq(model="llama-3.1-8b-instant", groq_api_key=GROQ_API_KEY)
+    logger.info("Initialized ChatGroq LLM client.")
+except Exception as e:
+    # Fail fast in this config: chat must be available
+    raise RuntimeError(f"Failed to initialize ChatGroq LLM client: {e}")
 
 # --- FastAPI App ---
 app = FastAPI()
@@ -276,13 +288,20 @@ def infer_course_difficulty(course: dict) -> str:
     """
     title = course.get("title", "").lower()
     tags = [t.lower() for t in course.get("tags", [])]
+    easy_keywords = ["intro", "beginner", "basics", "fundamentals", "getting started"]
+    hard_keywords = ["advanced", "expert", "deep", "masterclass", "in-depth"]
 
-    hard_keywords = ["advanced", "expert", "deep learning", "machine learning algorithms", "reinforcement"]
-    easy_keywords = ["basics", "fundamentals", "intro to", "introduction"]
+    # If explicit difficulty tag exists, respect it
+    diff_tag = course.get("difficulty")
+    if diff_tag:
+        dt = str(diff_tag).lower()
+        if dt in ("easy", "medium", "hard"):
+            return dt
 
-    if any(keyword in title for keyword in hard_keywords) or any(k in " ".join(tags) for k in hard_keywords):
+    # Check title and tags heuristics
+    if any(k in title for k in hard_keywords) or any(k in " ".join(tags) for k in hard_keywords):
         return "hard"
-    if any(keyword in title for keyword in easy_keywords) or any(k in " ".join(tags) for k in easy_keywords):
+    if any(k in title for k in easy_keywords) or any(k in " ".join(tags) for k in easy_keywords):
         return "easy"
     return "medium"
 
@@ -328,6 +347,11 @@ async def summarize_and_compact_conversation(conversation_id: str, keep_last: in
             formatted.append(f"{role.upper()}: {content}")
         messages_text = "\n".join(formatted)
 
+        # If LLM features are not available, skip summarization.
+        if not (llm is not None):
+            logger.info("LLM not available; skipping conversation summarization.")
+            return None
+
         summarize_prompt = PromptTemplate(
             input_variables=["messages"],
             template=(
@@ -367,10 +391,10 @@ async def get_quiz(
     difficulty_mapping = {"easy": 1, "medium": 2, "hard": 3}
     if difficulty.lower() not in difficulty_mapping:
         raise HTTPException(status_code=400, detail="Invalid difficulty.")
-    weight_value = difficulty_mapping[difficulty.lower()]
-    match_query: Dict[str, Any] = {"weight": weight_value}
-    if topic:
-        match_query["topic"] = {"$regex": f".*{topic}.*", "$options": "i"}
+        # If LLM features or prompt tooling are not available, skip summarization.
+        if not globals().get('LLM_ENABLED', False) or not globals().get('LANGCHAIN_CORE_OK', False):
+            logger.info("LLM or prompt tooling not available; skipping conversation summarization.")
+            return None
 
     try:
         questions = list(quiz_collection.aggregate([
@@ -594,12 +618,18 @@ async def status():
         "embeddings_count": embeddings_count,
         "user_quiz_results_count": results_count,
         "embeddings_source": EMBEDDINGS_SOURCE,
+        "llm_enabled": bool('llm' in globals() and llm is not None),
     }
 
 
 @app.post("/chat/")
 async def chat(input: ChatInput):
     try:
+        # Ensure LLM is available for chat
+        if llm is None:
+            logger.error("Chat requested but LLM client is not initialized.")
+            raise HTTPException(status_code=503, detail="Chat/LLM functionality is not available — server misconfiguration.")
+
         # Persist the incoming user message
         store_conversation_message(input.conversation_id, input.user_id, "user", input.message)
 
