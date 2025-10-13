@@ -78,6 +78,17 @@ export const apiHelpers = {
     return response.data;
   },
 
+  async getChatHistory(conversationId: string) {
+    const response = await api.get(
+      `/chat/history?conversation_id=${conversationId}`
+    );
+    return response.data?.messages ?? [];
+  },
+  async deleteChat(conversationId: string) {
+    const response = await api.delete(`/chat/${conversationId}`);
+    return response.data;
+  },
+
   async getUserQuizResults(userId: string) {
     const response = await api.get(`/quiz/results?user_id=${userId}`);
     return response.data;

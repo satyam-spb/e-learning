@@ -18,7 +18,7 @@ const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [conversationId] = useState(() => {
+  const [conversationId, setConversationId] = useState(() => {
     const existing = localStorage.getItem("conversationId");
     if (existing) return existing;
     const newId = `conv_${Date.now()}_${Math.random()
@@ -32,30 +32,35 @@ const Chatbot: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Load chat history from localStorage
-    // Clear any previous chat storage on mount (ensure a fresh chat when FE restarts)
-    try {
-      localStorage.removeItem(`chat_${conversationId}`);
-      localStorage.removeItem("conversationId");
-    } catch (err) {
-      console.warn("Failed to clear previous chat storage on mount", err);
-    }
-
-    const savedMessages = localStorage.getItem(`chat_${conversationId}`);
-    if (savedMessages) {
+    // Ephemeral session behavior: clear previous local and server conversation on mount
+    (async () => {
       try {
-        const parsed = JSON.parse(savedMessages);
-        setMessages(
-          parsed.map((msg: any) => ({
-            ...msg,
-            timestamp: new Date(msg.timestamp),
-          }))
-        );
-      } catch (error) {
-        console.error("Failed to load chat history:", error);
+        const existingConv = localStorage.getItem("conversationId");
+        if (existingConv) {
+          try {
+            await apiHelpers.deleteChat(existingConv);
+          } catch (e) {
+            // ignore server delete failures
+          }
+        }
+      } catch (err) {
+        // ignore
       }
-    } else {
-      // Add welcome message
+
+      // Clear local storage and start a fresh ephemeral conversation
+      try {
+        localStorage.removeItem(`chat_${conversationId}`);
+        localStorage.removeItem("conversationId");
+      } catch (err) {
+        // ignore
+      }
+
+      const newId = `conv_${Date.now()}_${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
+      localStorage.setItem("conversationId", newId);
+      setConversationId(newId);
+
       setMessages([
         {
           id: "welcome",
@@ -65,15 +70,45 @@ const Chatbot: React.FC = () => {
           timestamp: new Date(),
         },
       ]);
-    }
-  }, [conversationId]);
+    })();
+    // run once on mount
+  }, []);
 
   // Ensure chat storage is cleared when the page unloads (reload/close)
   useEffect(() => {
-    const handleUnload = () => {
+    const handleUnload = (ev?: BeforeUnloadEvent) => {
       try {
         localStorage.removeItem(`chat_${conversationId}`);
         localStorage.removeItem("conversationId");
+
+        // Delete server-side conversation via a keepalive POST to /chat/cleanup
+        const base = import.meta.env.VITE_API_BASE || "http://localhost:8000";
+        const url = `${base}/chat/cleanup`;
+        const body = JSON.stringify({ conversation_id: conversationId });
+
+        // preferred modern API: fetch with keepalive
+        try {
+          if (typeof fetch === "function") {
+            navigator?.sendBeacon ?? null; // hint for bundlers
+            // Note: fetch with keepalive may still be blocked if page is closing; sendBeacon is best-effort.
+            try {
+              fetch(url, {
+                method: "POST",
+                body,
+                keepalive: true,
+                headers: { "Content-Type": "application/json" },
+              });
+            } catch (e) {
+              // fallback to sendBeacon
+              if (navigator.sendBeacon) {
+                const blob = new Blob([body], { type: "application/json" });
+                navigator.sendBeacon(url, blob);
+              }
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
       } catch (err) {
         // ignore
       }

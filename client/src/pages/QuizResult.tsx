@@ -1,18 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Trophy, Star, BookOpen, MessageCircle, Home, RefreshCw } from 'lucide-react';
-import { useQuiz } from '../context/QuizContext';
-import { useAuth } from '../context/AuthContext';
-import { apiHelpers } from '../config/api';
-import StarBackground from '../components/UI/StarBackground';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Trophy,
+  Star,
+  BookOpen,
+  MessageCircle,
+  Home,
+  RefreshCw,
+  ExternalLink,
+} from "lucide-react";
+import { useQuiz } from "../context/QuizContext";
+import { useAuth } from "../context/AuthContext";
+import { apiHelpers } from "../config/api";
+import StarBackground from "../components/UI/StarBackground";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 interface Course {
   title: string;
   description: string;
   tags: string[];
   relevance: number;
+  link?: string;
+  type?: string;
 }
 
 const QuizResult: React.FC = () => {
@@ -24,7 +34,7 @@ const QuizResult: React.FC = () => {
 
   useEffect(() => {
     if (!quizState.isCompleted) {
-      navigate('/quiz');
+      navigate("/quiz");
       return;
     }
 
@@ -40,29 +50,38 @@ const QuizResult: React.FC = () => {
       );
       setRecommendations(recs);
     } catch (error) {
-      console.error('Failed to load recommendations:', error);
+      console.error("Failed to load recommendations:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'from-green-400 to-green-600';
-    if (score >= 60) return 'from-yellow-400 to-yellow-600';
-    return 'from-red-400 to-red-600';
+    if (score >= 80) return "from-green-400 to-green-600";
+    if (score >= 60) return "from-yellow-400 to-yellow-600";
+    return "from-red-400 to-red-600";
   };
 
   const getScoreMessage = (score: number) => {
-    if (score >= 90) return 'Outstanding! You\'re a cosmic champion! 🌟';
-    if (score >= 80) return 'Excellent work! You\'re among the stars! ✨';
-    if (score >= 70) return 'Great job! You\'re on the right trajectory! 🚀';
-    if (score >= 60) return 'Good effort! Keep exploring the cosmos! 🌍';
-    return 'Keep learning! Every star started as stardust! 💫';
+    if (score >= 90) return "Outstanding! You're a cosmic champion! 🌟";
+    if (score >= 80) return "Excellent work! You're among the stars! ✨";
+    if (score >= 70) return "Great job! You're on the right trajectory! 🚀";
+    if (score >= 60) return "Good effort! Keep exploring the cosmos! 🌍";
+    return "Keep learning! Every star started as stardust! 💫";
+  };
+
+  const getMotivationMessage = (score: number) => {
+    if (score >= 90) return "Amazing work — keep building on this momentum! 🚀";
+    if (score >= 75)
+      return "Great job — explore these resources to level up even more! 💪";
+    if (score >= 50)
+      return "Nice effort — these materials will help you strengthen your skills. You got this! ✨";
+    return "Keep going — consistency wins. Good luck, and enjoy the learning journey! 🌟";
   };
 
   const handleRetakeQuiz = () => {
     resetQuiz();
-    navigate('/quiz');
+    navigate("/quiz");
   };
 
   if (loading) {
@@ -76,7 +95,7 @@ const QuizResult: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
       <StarBackground />
-      
+
       <div className="container mx-auto px-6 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -102,7 +121,9 @@ const QuizResult: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className={`inline-block px-8 py-6 bg-gradient-to-r ${getScoreColor(quizState.score)} rounded-full text-white mb-4`}
+              className={`inline-block px-8 py-6 bg-gradient-to-r ${getScoreColor(
+                quizState.score
+              )} rounded-full text-white mb-4`}
             >
               <div className="text-6xl font-bold">{quizState.score}%</div>
               <div className="text-lg">Your Score</div>
@@ -117,6 +138,15 @@ const QuizResult: React.FC = () => {
               {getScoreMessage(quizState.score)}
             </motion.p>
 
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-md text-gray-200 mb-6 italic"
+            >
+              {getMotivationMessage(quizState.score)}
+            </motion.p>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -124,7 +154,9 @@ const QuizResult: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.7 }}
                 className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-500/20"
               >
-                <div className="text-2xl font-bold text-purple-400">{quizState.topic}</div>
+                <div className="text-2xl font-bold text-purple-400">
+                  {quizState.topic}
+                </div>
                 <div className="text-gray-400">Topic</div>
               </motion.div>
               <motion.div
@@ -133,7 +165,9 @@ const QuizResult: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-500/20"
               >
-                <div className="text-2xl font-bold text-cyan-400 capitalize">{quizState.difficulty}</div>
+                <div className="text-2xl font-bold text-cyan-400 capitalize">
+                  {quizState.difficulty}
+                </div>
                 <div className="text-gray-400">Difficulty</div>
               </motion.div>
               <motion.div
@@ -142,7 +176,9 @@ const QuizResult: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.9 }}
                 className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-500/20"
               >
-                <div className="text-2xl font-bold text-pink-400">{quizState.questions.length}</div>
+                <div className="text-2xl font-bold text-pink-400">
+                  {quizState.questions.length}
+                </div>
                 <div className="text-gray-400">Questions</div>
               </motion.div>
             </div>
@@ -170,12 +206,18 @@ const QuizResult: React.FC = () => {
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-white mb-2">{course.title}</h3>
-                        <p className="text-gray-300 mb-4">{course.description}</p>
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          {course.title}
+                        </h3>
+                        <p className="text-gray-300 mb-4">
+                          {course.description}
+                        </p>
                       </div>
                       <div className="flex items-center space-x-1 ml-4">
                         <Star className="h-5 w-5 text-yellow-400" />
-                        <span className="text-yellow-400 font-semibold">{course.relevance}%</span>
+                        <span className="text-yellow-400 font-semibold">
+                          {course.relevance}%
+                        </span>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -187,6 +229,32 @@ const QuizResult: React.FC = () => {
                           {tag}
                         </span>
                       ))}
+                    </div>
+                    <div className="mt-4 flex items-center justify-between">
+                      <div />
+                      {course.link ? (
+                        <button
+                          onClick={() =>
+                            window.open(
+                              course.link,
+                              "_blank",
+                              "noopener,noreferrer"
+                            )
+                          }
+                          className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 rounded-md font-medium text-white"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          <span>Open Resource</span>
+                        </button>
+                      ) : (
+                        <button
+                          disabled
+                          className="inline-flex items-center space-x-2 px-4 py-2 bg-slate-600 rounded-md font-medium text-white opacity-60 cursor-not-allowed"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          <span>No Link</span>
+                        </button>
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -237,7 +305,8 @@ const QuizResult: React.FC = () => {
               <BookOpen className="h-8 w-8 text-purple-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold mb-2">Save Your Progress</h3>
               <p className="text-gray-300 mb-4">
-                Sign up to track your quiz history, maintain learning streaks, and get personalized recommendations!
+                Sign up to track your quiz history, maintain learning streaks,
+                and get personalized recommendations!
               </p>
               <Link
                 to="/auth"

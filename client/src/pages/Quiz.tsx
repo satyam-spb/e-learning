@@ -87,7 +87,7 @@ const Quiz: React.FC = () => {
       );
       setQuestions(questions);
       setShowConfig(false);
-      toast.success("Quiz loaded successfully!");
+      toast.success("The spotlight’s on you—let’s see how you shine!");
     } catch (error) {
       toast.error(
         "We're still building this quiz. You might discover more by tweaking your topic or profession slightly."
