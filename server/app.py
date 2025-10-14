@@ -400,27 +400,74 @@ async def summarize_and_compact_conversation(conversation_id: str, keep_last: in
         logger.error(f"Error during conversation summarization: {e}")
         return None
 
+# @app.get("/quiz", response_model=List[QuizQuestion])
+# async def get_quiz(
+#     difficulty: str = Query(...),
+#     topic: Optional[str] = Query(None)
+# ):
+#     difficulty_mapping = {"easy": 1, "medium": 2, "hard": 3}
+#     if difficulty.lower() not in difficulty_mapping:
+#         raise HTTPException(status_code=400, detail="Invalid difficulty.")
+#         # If LLM features or prompt tooling are not available, skip summarization.
+#         if not globals().get('LLM_ENABLED', False) or not globals().get('LANGCHAIN_CORE_OK', False):
+#             logger.info("LLM or prompt tooling not available; skipping conversation summarization.")
+#             return None
+
+#     try:
+#         questions = list(quiz_collection.aggregate([
+#             {"$match": match_query},
+#             {"$sample": {"size": 10}}
+#         ]))
+#         if not questions:
+#             raise HTTPException(status_code=404, detail=f"No questions found for difficulty '{difficulty}' and topic '{topic or 'any'}'.")
+#         return questions
+#     except Exception as e:
+#         logger.error(f"Error fetching quiz questions: {str(e)}")
+#         raise HTTPException(status_code=500, detail=f"Error fetching quiz: {str(e)}")
+
 @app.get("/quiz", response_model=List[QuizQuestion])
 async def get_quiz(
     difficulty: str = Query(...),
     topic: Optional[str] = Query(None)
 ):
-    difficulty_mapping = {"easy": 1, "medium": 2, "hard": 3}
-    if difficulty.lower() not in difficulty_mapping:
-        raise HTTPException(status_code=400, detail="Invalid difficulty.")
-        # If LLM features or prompt tooling are not available, skip summarization.
-        if not globals().get('LLM_ENABLED', False) or not globals().get('LANGCHAIN_CORE_OK', False):
-            logger.info("LLM or prompt tooling not available; skipping conversation summarization.")
-            return None
+    # Check whether quiz documents include a 'difficulty' field. If not, we can't filter by difficulty.
+    try:
+        sample_doc = quiz_collection.find_one({}, projection={"difficulty": 1})
+    except Exception as e:
+        logger.error(f"Failed to read quiz collection metadata: {e}")
+        raise HTTPException(status_code=500, detail="Failed to access quiz data")
+
+    has_difficulty_field = bool(sample_doc and sample_doc.get("difficulty") is not None)
+
+    # If the collection has difficulty, validate the difficulty parameter and filter by it; otherwise ignore difficulty.
+    if has_difficulty_field:
+        difficulty_mapping = {"easy": 1, "medium": 2, "hard": 3}
+        if difficulty.lower() not in difficulty_mapping:
+            raise HTTPException(status_code=400, detail="Invalid difficulty.")
+
+        match_query = {"difficulty": difficulty_mapping[difficulty.lower()]}
+        if topic:
+            match_query["topic"] = topic
+
+        pipeline = [{"$match": match_query}, {"$sample": {"size": 10}}]
+    else:
+        # No difficulty field present; sample by topic if provided, otherwise sample globally.
+        if topic:
+            pipeline = [{"$match": {"topic": topic}}, {"$sample": {"size": 10}}]
+        else:
+            pipeline = [{"$sample": {"size": 10}}]
 
     try:
-        questions = list(quiz_collection.aggregate([
-            {"$match": match_query},
-            {"$sample": {"size": 10}}
-        ]))
+        questions = list(quiz_collection.aggregate(pipeline))
         if not questions:
-            raise HTTPException(status_code=404, detail=f"No questions found for difficulty '{difficulty}' and topic '{topic or 'any'}'.")
+            if has_difficulty_field:
+                raise HTTPException(status_code=404, detail=f"No questions found for difficulty '{difficulty}' and topic '{topic or 'any'}'.")
+            else:
+                raise HTTPException(status_code=404, detail=f"No questions found for topic '{topic}' or in the quiz collection.")
         return questions
+    except HTTPException:
+        # Re-raise our deliberate HTTP exceptions
+        raise
     except Exception as e:
         logger.error(f"Error fetching quiz questions: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error fetching quiz: {str(e)}")
