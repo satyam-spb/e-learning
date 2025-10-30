@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_BASE || "http://localhost:8000";
+export const BASE_URL =
+  import.meta.env.VITE_API_BASE || "http://localhost:8000";
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -75,6 +76,17 @@ export const apiHelpers = {
       // backend expects a string for user_id; send empty when no user
       user_id: userId ?? "",
     });
+    return response.data;
+  },
+
+  async getChatHistory(conversationId: string) {
+    const response = await api.get(
+      `/chat/history?conversation_id=${conversationId}`
+    );
+    return response.data?.messages ?? [];
+  },
+  async deleteChat(conversationId: string) {
+    const response = await api.delete(`/chat/${conversationId}`);
     return response.data;
   },
 

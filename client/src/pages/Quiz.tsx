@@ -30,7 +30,51 @@ const Quiz: React.FC = () => {
     difficulty: "medium",
   });
   const [professionOptions, setProfessionOptions] = useState<string[]>([]);
-  const [topicOptions, setTopicOptions] = useState<string[]>([]);
+  // Restrict topics to a curated allowed list to match quiz coverage
+  const allowedTopics = [
+    "AI Model Deployment & MLOps",
+    "APIs and RESTful Services",
+    "Agile & DevOps Practices",
+    "Android Development",
+    "Backend Development (Node.js, Express)",
+    "C/C++",
+    "Clean Code & Code Refactoring",
+    "Cloud Computing (AWS, Azure, GCP)",
+    "Data Science with Python/R",
+    "Data Structures and Algorithms",
+    "Deep Learning & Neural Networks",
+    "Design Patterns & Architecture",
+    "Docker & Containerization",
+    "Frontend Development (HTML, CSS, JS)",
+    "Full-Stack Web Development",
+    "Functional Programming",
+    "GraphQL Fundamentals",
+    "Infrastructure as Code (Terraform)",
+    "JavaScript",
+    "Kubernetes & Microservices",
+    "Machine Learning Basics",
+    "Memory Management & Pointers",
+    "Mobile App Deployment",
+    "Natural Language Processing (NLP)",
+    "Nextjs",
+    "ORMs and Database Optimization",
+    "Object-Oriented Programming (OOP)",
+    "Progressive Web Apps",
+    "Python",
+    "React Native / Flutter",
+    "Recursion and Dynamic Programming",
+    "SQL & Relational Databases",
+    "Serverless Architecture",
+    "Testing & Debugging",
+    "TypeScript",
+    "Version Control (Git & GitHub)",
+    "ios development",
+    "java",
+    "noSQL",
+    "react",
+  ];
+
+  const [topicOptions, setTopicOptions] = useState<string[]>(allowedTopics);
 
   const currentQuestion = quizState.questions[quizState.currentQuestionIndex];
   const progress =
@@ -52,15 +96,14 @@ const Quiz: React.FC = () => {
       try {
         const courses = await apiHelpers.getCourses();
         const profSet = new Set<string>();
-        const tagSet = new Set<string>();
         courses.forEach((c: any) => {
           if (Array.isArray(c.profession))
             c.profession.forEach((p: string) => profSet.add(p));
-          if (Array.isArray(c.tags))
-            c.tags.forEach((t: string) => tagSet.add(t));
+          // we do not populate topics from course tags; topics are curated
         });
         setProfessionOptions(Array.from(profSet).sort());
-        setTopicOptions(Array.from(tagSet).sort());
+        // topics remain the curated allowed list
+        setTopicOptions(allowedTopics);
       } catch (err) {
         console.error("Failed to load course options:", err);
       }
@@ -87,7 +130,7 @@ const Quiz: React.FC = () => {
       );
       setQuestions(questions);
       setShowConfig(false);
-      toast.success("Quiz loaded successfully!");
+      toast.success("The spotlight’s on you—let’s see how you shine!");
     } catch (error) {
       toast.error(
         "We're still building this quiz. You might discover more by tweaking your topic or profession slightly."
