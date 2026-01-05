@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
   Trophy,
   Star,
-  BookOpen,
   MessageCircle,
   Home,
   RefreshCw,
@@ -294,28 +293,33 @@ const QuizResult: React.FC = () => {
             </Link>
           </motion.div>
 
-          {/* Sign Up Prompt for Non-users */}
-          {!user && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.7 }}
-              className="mt-8 p-6 bg-gradient-to-r from-purple-800/50 to-pink-800/50 rounded-xl border border-purple-500/30 text-center"
-            >
-              <BookOpen className="h-8 w-8 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Save Your Progress</h3>
-              <p className="text-gray-300 mb-4">
-                Sign up to track your quiz history, maintain learning streaks,
-                and get personalized recommendations!
-              </p>
-              <Link
-                to="/auth"
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 rounded-lg font-semibold transform hover:scale-105 transition-all"
-              >
-                <span>Sign Up Now</span>
-              </Link>
-            </motion.div>
-          )}
+          {/* COMMENTED OUT: Sign Up Prompt for Non-users - Sign-in functionality disabled */}
+          {/* To re-enable: copy the code from the preserved reference below and uncomment it */}
+
+          {/* 
+          // PRESERVED REFERENCE CODE:
+          // {!user && (
+          //   <motion.div
+          //     initial={{ opacity: 0, y: 30 }}
+          //     animate={{ opacity: 1, y: 0 }}
+          //     transition={{ duration: 0.8, delay: 1.7 }}
+          //     className="mt-8 p-6 bg-gradient-to-r from-purple-800/50 to-pink-800/50 rounded-xl border border-purple-500/30 text-center"
+          //   >
+          //     <BookOpen className="h-8 w-8 text-purple-400 mx-auto mb-4" />
+          //     <h3 className="text-xl font-bold mb-2">Save Your Progress</h3>
+          //     <p className="text-gray-300 mb-4">
+          //       Sign up to track your quiz history, maintain learning streaks,
+          //       and get personalized recommendations!
+          //     </p>
+          //     <Link
+          //       to="/auth"
+          //       className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 rounded-lg font-semibold transform hover:scale-105 transition-all"
+          //     >
+          //       <span>Sign Up Now</span>
+          //     </Link>
+          //   </motion.div>
+          // )}
+          */}
         </motion.div>
       </div>
     </div>
