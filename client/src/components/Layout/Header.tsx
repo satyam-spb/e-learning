@@ -61,7 +61,7 @@ const Header: React.FC = () => {
           )}
         </div>
 
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           {user ? (
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2 text-white">
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
               Sign In
             </Link>
           )}
-        </div>
+        </div> */}
       </nav>
     </motion.header>
   );
